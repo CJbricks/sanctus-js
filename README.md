@@ -27,15 +27,15 @@ Every path has daily Mass, the Liturgy of the Hours (the Carmelites pray the tra
 
 ## Opening
 
-Title → **Choose Your Calling** → you appear on the **grounds** outside the house in **ordinary lay clothes**. Your first task is to **find the superior**: the Local Servant (Franciscan), the Prior (Dominican), or Father Prior (Carmelite). He sets you three entry tasks, one for each evangelical counsel: **poverty** (give your things to the poor), **chastity** (a quiet resolution of purity of heart before Our Lady), and **obedience** (a humble chore done exactly as asked). Then you're received as a **Postulant**. Vows come later, at first and solemn profession. There's **no name entry**: you're addressed by your role (Postulant, then Brother, then Father if ordained), because the vocation matters more than the name.
+Title → **Choose Your Calling** → you appear on the **grounds** outside the house in **ordinary lay clothes**. Your first task is to **find the superior**: the Local Servant (Franciscan), the Prior (Dominican), or Father Prior (Carmelite). He sets you three entry tasks, one for each evangelical counsel: **poverty** (give your things to the poor), **chastity** (a quiet resolution of purity of heart before Our Lady), and **obedience** (a humble chore done exactly as asked). Then you're received as a **Postulant** (simple postulant outfit — or Carmelite brown postulant robes). Vows come later, at first and solemn profession. There's **no typed name entry**: you're addressed by your role (Postulant, then Brother, then Father if ordained). At novitiate investiture you receive a **religious name** from a saint list. A deacon is *Brother* in the house and *Deacon* at the altar.
 
 ## Core loop
 
 1. **Wake at the bell** and see your day: which Hours, Mass, obediences (assigned jobs), and free windows are on the board.
 2. **Keep the bells.** Go to the Hours, Mass, adoration, and the Rosary. These are the spine of the day. They don't spend energy, but they set the clock.
 3. **Spend your Vigor** (10 blocks a day) in the open windows: outreach in the city, study and class, manual work, helping a brother.
-4. **Meet Encounters**: a temptation inside, or a hard conversation outside. They play out as turn-based scenes where your *virtues* are your moves.
-5. **Pray the Rosary** every day (the mysteries change by weekday), and pause at the many statues and crucifixes along the way.
+4. **Meet Encounters** (Unified: Inner temptation, Outer hard conversation, and Dominican Disputation). Your *virtues* are your moves; people are never enemies.
+5. **Pray the Rosary** every day (mysteries by weekday; Joyful on Advent/Christmas Sundays and Sorrowful on Lent Sundays by default), and pause at the many statues and crucifixes along the way.
 6. **Fast and do penance within obedience.** Penance is good here, but only what your superior permits. Prudence is a virtue too.
 7. **Sleep, examine your conscience, and grow.** Spiritual Health and your virtues rise. You petition for the next stage of formation: postulant, novice, vows, and then either the brother's path or the path to diaconate and priesthood.
 
@@ -83,5 +83,5 @@ npm start        # serve the production build locally
 |---|---|
 | [`docs/GAME_RULES.md`](docs/GAME_RULES.md) | Every system and its rules: the daily loop, the Brick City → Sanctus mapping, Spiritual Health, encounters, ranks, items |
 | [`docs/WORLD.md`](docs/WORLD.md) | Each path's home base and outside world, room by room and area by area, plus the first playable map for each |
-| [`docs/NOTES.md`](docs/NOTES.md) | Beginner learning notes, the decision log, and cited sources |
+| [`docs/NOTES.md`](docs/NOTES.md) | Beginner learning notes, the decision log, open questions, women's-path roadmap, and cited sources |
 | `docs/concepts/<franciscan\|dominican\|carmelite>/` | CJ's reference images (to be uploaded) |

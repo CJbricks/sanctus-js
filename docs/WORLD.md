@@ -109,6 +109,8 @@ Each path's **home base** (room by room), its **outside world** (area by area), 
 
 *The House of Studies of St. Raymond* (fictional; named for St. Raymond of Peñafort, the Dominican canonist who, by tradition, asked Thomas to write the *Summa contra Gentiles*) is a big stone priory on a hill in **Capitol City** (DC-like), next to a Catholic university and across the avenue from a parish. It is **larger** than the friary: a choir chapel, two libraries, classrooms, a cloister garth, a refectory, and many cells.
 
+**Bells (weekday, academic year).** St. Raymond's public prayer times follow the published schedule of the Priory of the Immaculate Conception at the Dominican House of Studies (Washington, DC) — see NOTES.md sources and GAME_RULES §3: **7:00 Lauds · 7:20 Mass · 12:00 Rosary and Sext · 5:30 Office of Readings and Vespers · 9:00 Compline (Mon–Thu)**. Sunday Mass is later (11:15 at DHS); summer Compline is earlier. The Salve Regina procession after Compline is kept as Dominican house custom for the fictional priory.
+
 ### Home base, room by room
 
 | Room | What's there | What you do | Devotion stops |
