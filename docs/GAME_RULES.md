@@ -48,7 +48,7 @@ Loading (saint quote) → Title (Resume / New Game) → Choose Your Calling → 
 
 1. **Title.** Resume (only if a save exists) and New Game. The quote under the logo is a short line from a saint of a random path.
 2. **Choose Your Calling.** Three panels: Franciscan Friars, Dominican Friars, Carmelite Monks. Each shows the patron saints, the habit (as a preview of what you'll grow into), the home base, and a one-line "your day leans toward…". Confirm is final for that save.
-3. **No name entry.** You are never asked for a name. You are addressed only by role: *Postulant* → *Brother* (novice and professed) → *Father* after priestly ordination, or *Brother* for life on the brother track. A deacon is still *Brother* in the house (religious deacons customarily keep the title) and *Deacon* at the altar (see open questions). The save stores the role and rank, not a name. *(Decision: names matter less than the vocation. See NOTES.md.)* One exception follows real practice: at **novitiate investiture** the community may give you a **religious name** (e.g. "Brother ___ of the Cross"). This is an open question for CJ (on by default: picked from a list of saints, never typed).
+3. **No typed name entry.** You are never asked to type a name. You are addressed by role: *Postulant* → *Brother* (novice and professed) → *Father* after priestly ordination, or *Brother* for life on the brother track. A deacon is ***Brother* in the house** and ***Deacon* at the altar** (settled). The save stores the role and rank, not a typed name. *(Decision: names matter less than the vocation. See NOTES.md.)* At **novitiate investiture** the community gives you a **religious name** chosen from a saint list (never typed), e.g. "Brother ___ of the Cross" (settled **on**).
 4. **Spawn on the grounds** outside the house in **ordinary lay clothes** (32×40 sprite: plain button shirt or sweater, trousers, simple shoes, small bag; modest and neutral). The first objective marker reads **"Find the superior of the house."**
    - Franciscan (CFR usage): the **Local Servant** (CFR calls the local superior "Servant", not "Guardian").
    - Dominican: the **Prior**.
@@ -57,7 +57,7 @@ Loading (saint quote) → Title (Resume / New Game) → Choose Your Calling → 
    - **Poverty:** give away your worldly things (the bag, the watch, the extra jacket) to the poor box or to the outreach line. Franciscan: hand them out yourself on the soup line. Dominican: give them to the parish St. Vincent de Paul box across the avenue. Carmelite: leave them at the gate for the town's thrift drive, keeping only what the Prior allows.
    - **Chastity:** a quiet, tasteful scene of purity of heart: kneel before a statue of Our Lady, read a short prayer, and choose a resolution (custody of the eyes, guarding the heart, giving your love to God and neighbor). No romance content, no shame; dignified and age-appropriate.
    - **Obedience:** a humble chore done **exactly as asked** (sweep the chapel steps, set the refectory, muck one stall). Doing it differently than asked, even "better," earns a gentle correction and a retry. The lesson is the obedience, not the result.
-6. Completing all three ends with a short **reception scene**. You become a **Postulant**. Your outfit changes to the postulant dress for your path (see §12): Carmelites receive brown postulant robes and a larger postulant scapular (as the Wyoming monks do); Franciscans and Dominicans stay in simple lay clothes, since their postulant dress is unverified (open question). The habit itself comes later, at investiture into the novitiate.
+6. Completing all three ends with a short **reception scene**. You become a **Postulant**. Your outfit changes to the postulant dress for your path (see §12): Carmelites receive brown postulant robes and a larger postulant scapular (as the Wyoming monks do); Franciscans and Dominicans receive a **simple postulant outfit** (modest, original design, clearly *not* a habit) until investiture. The habit itself comes later, at investiture into the novitiate.
 
 ## 3. The day: bells, slots, and Vigor
 
@@ -66,16 +66,16 @@ Brick City had five clock slots and **10 energy blocks**. Sanctus keeps both ide
 - **Bells** are the fixed events of the house: the Hours, Mass, adoration, the Rosary, meals, Grand Silence. They **cost 0 Vigor**, but they move the clock and you're expected to be there. Missing one without a reason affects Spiritual Health (§6) and Community.
 - **Vigor** (10 blocks a day) is spent only in the **open windows** between bells: outreach, class, study, manual work, chores.
 - **Sleep** ends the day and refills Vigor. The Carmelite night is **split** (sleep, rise for Midnight Matins, sleep again). That's their normal rule, so split sleep counts as a full night for them.
-- Each path's day uses the same six HUD slot names (Vigil, Morning, Midday, Afternoon, Evening, Night), but the bells fall differently. Times below follow the real communities' published horaria, simplified. The Dominican times are approximate (see open questions).
+- Each path's day uses the same six HUD slot names (Vigil, Morning, Midday, Afternoon, Evening, Night), but the bells fall differently. Times below follow published horaria where we have them. **Dominican weekday bells** follow the academic-year public schedule of the Priory of the Immaculate Conception at the Dominican House of Studies (Washington, DC), adapted to the fictional House of St. Raymond (sources in NOTES.md). Sunday and summer schedules differ (Sunday Mass is later; summer Compline is earlier); the game uses the weekday academic-year pattern as the default HUD day, with Sunday/feast variants.
 
-| Slot | Franciscan (CFR-style) | Dominican (house of studies) | Carmelite (Wyoming-style, cloistered) |
+| Slot | Franciscan (CFR-style) | Dominican (House of St. Raymond; DHS weekday academic year) | Carmelite (Wyoming-style, cloistered) |
 |---|---|---|---|
-| **Vigil** | 6:00 Office of Readings · 6:30–7:30 meditation hour | ~6:00 Office of Readings, Lauds · mental prayer | **11:45 p.m.–1:00 Matins & Lauds** (previous night) · 6:00 Angelus, Prime |
-| **Morning** | 7:30 Morning Prayer · 7:50 Mass · **window: outreach (4 Vigor)** | ~7:00 Mass · **window: class / disputation (4)** | 6:25 mental prayer · 7:25 Terce · 7:45 sung conventual Mass (Latin) · **window: work/class (3)** |
-| **Midday** | 12:00 Midday Prayer · lunch | Midday Prayer · lunch · recreation | 11:40 Sext + examen · 12:00 Angelus, lunch, None · 12:45 recreation |
+| **Vigil** | 6:00 Office of Readings · 6:30–7:30 meditation hour | Quiet mental prayer / lectio before Lauds (no public Office of Readings at dawn at DHS; that Hour is sung with Vespers) | **11:45 p.m.–1:00 Matins & Lauds** (previous night) · 6:00 Angelus, Prime |
+| **Morning** | 7:30 Morning Prayer · 7:50 Mass · **window: outreach (4 Vigor)** | **7:00 Lauds · 7:20 Mass** · **window: class / disputation (4)** | 6:25 mental prayer · 7:25 Terce · 7:45 sung conventual Mass (Latin) · **window: work/class (3)** |
+| **Midday** | 12:00 Midday Prayer · lunch | **12:00 Rosary and Sext** · lunch · recreation | 11:40 Sext + examen · 12:00 Angelus, lunch, None · 12:45 recreation |
 | **Afternoon** | **window: outreach / chores (4)** | **window: library study / teaching / city ministry (4)** | **window: work/class (3)** · 3:00 Litany of Our Lady + Divine Mercy Chaplet |
-| **Evening** | 5:00–6:00 Evening Prayer + **Holy Hour of adoration** · supper · **window: night outreach (2)** | Vespers · Rosary · supper · **window: preaching prep / study (2)** | 5:00 Vespers · 5:30 mental prayer · 6:30 Angelus, collation |
-| **Night** | 9:15 Night Prayer and Rosary · Grand Silence | Compline + **Salve Regina procession** · Grand Silence | 7:15 Rosary, examen, Compline · spiritual reading in the cell · 8:30 retire |
+| **Evening** | 5:00–6:00 Evening Prayer + **Holy Hour of adoration** · supper · **window: night outreach (2)** | **5:30 Office of Readings and Vespers** · supper · **window: preaching prep / study (2)** | 5:00 Vespers · 5:30 mental prayer · 6:30 Angelus, collation |
+| **Night** | 9:15 Night Prayer and Rosary · Grand Silence | **9:00 Compline (Mon–Thu)** + **Salve Regina procession** (Dominican custom kept for St. Raymond) · Grand Silence · *no public Compline Fri/Sat at DHS* | 7:15 Rosary, examen, Compline · spiritual reading in the cell · 8:30 retire |
 | **Open Vigor** | **10** (most time outside) | **10** (most time in study) | **6** (most time in choir and prayer; the rest of the day *is* liturgy) |
 
 **How the paths differ:** Franciscans have the most open windows and spend them in the city. Dominicans spend theirs on study, class, and preaching, with some city ministry. Carmelites have the fewest open blocks and the most bells: every Hour, a sung Mass, two hours of mental prayer, the Rosary, and spiritual reading. Their windows go to gardening, horses, cattle, and walks on the grounds.
@@ -94,8 +94,8 @@ Brick City had five clock slots and **10 energy blocks**. Sanctus keeps both ide
 | Season / feast | Effect in game |
 |---|---|
 | **Advent** | Candle wreath in chapels, quieter music, extra Scripture readings (Isaiah) |
-| **Christmas** | Feast meals, crèche props, Joyful Mysteries on Sundays (optional custom) |
-| **Lent** | Fasting days open per permission (§8), Stations of the Cross devotion stops, purple in the chapel, Sorrowful Mysteries on Sundays (optional custom) |
+| **Christmas** | Feast meals, crèche props, **Joyful Mysteries on Sundays** (seasonal Rosary custom **on** by default) |
+| **Lent** | Fasting days open per permission (§8), Stations of the Cross devotion stops, purple in the chapel, **Sorrowful Mysteries on Sundays** (seasonal Rosary custom **on** by default) |
 | **Holy Week / Triduum** | Special non-interactive liturgy scenes; Good Friday fast; the tabernacle empty and open on Good Friday (accurate) |
 | **Easter** | Alleluias return, flowers, Glorious Mysteries, big feast |
 | **Ordinary Time** | Normal rhythm |
@@ -128,7 +128,7 @@ Brick City's real systems, as read from `CJbricks/brick-city` (README.md and doc
 | **Levels + level-gated unlocks** | **Ranks** (formation stages + Holy Orders) | Changed | Rank doesn't come from XP alone: time in stage + XP + Spiritual Health ≥ 60 + the community's approval (Chapter) + your free petition (§12). |
 | **Races (5K → marathon → ultras)** | **Encounters** + **milestone ceremonies** | Changed | Temptations and hard conversations replace races (§10). Investiture, professions, and ordinations replace big races as milestones. |
 | **Race Readiness screen** | **Examen screen** before big encounters and petitions | Changed | Shows Constancy, Fervor, Weariness, and the virtues the moment calls for. |
-| **Rival (Remy) + rematches** | **Companion in holy rivalry** | Changed | A fellow postulant per path. You "compete" only in friendly ways (memorizing psalms, chant, soup line servings, disputation). Never an enemy; his story runs alongside yours. Rematches become joint tasks after ~10 days. |
+| **Rival (Remy) + rematches** | **Companion in holy rivalry** | Changed | A fellow postulant per path. You "compete" only in friendly ways (memorizing psalms, chant, soup line servings, disputation). Never an enemy; his story runs alongside yours. Joint tasks open after about two weeks. **His story may include discerning out** partway — told realistically and kindly, never as failure or mockery. |
 | **Sponsors (brands) + obligations** | **Benefactors** and **apostolate requests** | Changed | Benefactors give alms *to the house* (refill the pantry and the building fund). Requests (a talk at a parish, a retreat, a hospital visit) take a window; declining is allowed but costs a little Community. No brands. |
 | **Unlockable towns / mountain gate** | **Unlockable areas by rank** | Kept | New rooms, city districts, and grounds open by rank and task (e.g. enclosure areas at novitiate, the pulpit at diaconate). Locked areas show greyed out with a sign or a brother explaining. |
 | **Town map + quick travel** | **House map + city map** | Kept | `P` opens the map. Quick travel works only to unlocked places and never during a bell. |
@@ -146,9 +146,9 @@ Brick City's real systems, as read from `CJbricks/brick-city` (README.md and doc
 | **HUD status panel + ticker** | **Habit card HUD** | Changed | Spiritual Health (with 5 mini bars), Vigor, Weariness, next bell, current rank title. The ticker shows growth gently: "+2 Prayer ▲ · Constancy ▲". |
 | **Loading screen + random quote** | **Loading screen with a saint's line** | Kept | Short lines from public-domain translations of the path's saints. |
 | **Title screen** | **Title + Choose Your Calling** | Changed | §2. |
-| **Gender choice + name entry** | **Removed** | Changed | All three are men's communities, so there's no choice; no name entry (§2). Women's branches are an open question. |
+| **Gender choice + name entry** | **Removed** (typed name) | Changed | All three launch paths are men's communities, so there's no gender choice; no typed name (§2). A **religious name** is given at novitiate from a saint list. Women's communities are **future paths** (roadmap in NOTES.md). |
 | **Save / Resume (localStorage)** | **Save / Resume** | Kept | Key `sanctus-save-v1`; stores path, role/rank, day, meters. Auto-saves after each action (§18). |
-| **Chiptune music** | **Original chant-inspired chiptune** | Kept | Original melodies in the spirit of modal chant; whether to arrange public-domain Gregorian melodies is an open question. |
+| **Chiptune music** | **Original + PD Gregorian arrangements** | Kept | Original chant-inspired melodies, plus arrangements of **public-domain Gregorian** melodies, all rendered in the chiptune engine (no audio files). |
 | **Win confetti** | **Bells and soft light** | Changed | No confetti in sacred spaces. Milestones ring the house bell. |
 | **Brick City sign / motto** | **House motto plaque** | Kept | Franciscan "Pax et Bonum," Dominican "Veritas," Carmelite "Zelo zelatus sum…" (Elijah's words, the Carmelite motto). |
 
@@ -184,7 +184,7 @@ Brick City's real systems, as read from `CJbricks/brick-city` (README.md and doc
 |---|---|---|
 | 0–29 | *Tepid* | The superior asks to see you (a kind talk). Rank petitions are paused. Encounters are harder (lower Readiness). |
 | 30–59 | *Steady* | Normal play. |
-| 60–79 | *Fervent* | **Rank petitions open** (if the 2-week average is ≥ 60 and the other gates are met). The encounter move *Aspiration* is strengthened. |
+| 60–79 | *Fervent* | **Rank petitions open** (if the **month average** is ≥ 60 and the other gates are met). The encounter move *Aspiration* is strengthened. |
 | 80–100 | *Recollected* | Contemplative prayer scenes, rare consolation events, mentor tasks (helping a newer postulant), deeper reading pages. |
 
 **Dryness is separate from SH.** You can have high SH and still enter a season of dryness (§14). That's accurate: St. John of the Cross teaches that dryness often comes to the faithful as purification, not as a sign of failure.
@@ -233,17 +233,16 @@ Brick City punished skipped meals. Sanctus treats fasting and penance as **good*
 
 ## 10. Encounters (what replaces races and battles)
 
-### Options considered
+**Final choice (CJ, 2026-11-21): Option C — Unified Encounters** with three faces: **Inner**, **Outer**, and **Dominican Disputation**. This is locked for implementation.
 
-| Option | How it works | Pros | Cons |
-|---|---|---|---|
-| **A. Virtue vs. Vice duel** | Classic turn-based JRPG fight. A vice (Pride, Envy, Wrath, Sloth…) has an HP-like "Pull" bar; your virtues are attack moves. | Instantly familiar; great GBC feel; teaches the vice/virtue pairs. | Risks making temptation a cartoon monster and grace a damage stat; only works for inner struggles. |
-| **B. Hard Conversations** | Dialogue-driven turns with a person (a man on the soup line, a skeptical student, a grieving widow). Moves: Listen, Ask, Share, Pray silently, Give. A Trust bar instead of HP. | Humane, fits the Franciscan and Dominican street life beautifully, teaches charity. | Risk of treating people as targets to "win"; little to do for the cloistered Carmelites. |
-| **C. Unified Encounters (recommended)** | One turn-based engine with two faces: **Inner** (temptation, drawn as abstract weather or a weight in the heart) and **Outer** (a hard conversation, never an enemy). Same menu, same virtues-as-moves, different goals. | Keeps the JRPG battle feel; covers all three paths (Carmelites mostly Inner, Franciscans mostly Outer, Dominicans both plus Disputation); one engine to build and test. | More design work up front; needs careful writing so Outer scenes never feel like "beating" a person. |
+### Considered (not chosen)
 
-**Recommendation: Option C, Unified Encounters.**
+| Option | How it works | Why not |
+|---|---|---|
+| **A. Virtue vs. Vice duel** | Classic turn-based JRPG fight. A vice has an HP-like "Pull" bar; virtues are attack moves. | Risks making temptation a cartoon monster and grace a damage meter; only covers inner struggles. |
+| **B. Hard Conversations only** | Dialogue turns with a person; Trust bar instead of HP. | Humane for street ministry, but little for cloistered Carmelites; alone it couldn't carry the whole game. |
 
-### Encounter rules (Option C)
+### Encounter rules (Option C — final)
 
 - **Your bar:** **Peace** (HP-like). It falls when a temptation pulls or a conversation goes badly; it never reaches "death". At 0 you **stumble** (Inner) or the conversation ends in **"Not today"** (Outer).
 - **Menu (GBC-style 4 slots):** **VIRTUE** (choose a virtue as a move) · **PRAY** (an aspiration, or *Turn to prayer*: one decade of the Rosary, which takes a turn and steadies Peace) · **WORD** (recall a short Scripture verse or saint's line you've unlocked) · **WAIT** (patience: sometimes the right move is silence).
@@ -259,7 +258,7 @@ Brick City punished skipped meals. Sanctus treats fasting and penance as **good*
 The Rosary is a **primary, daily prayer on every path**. It's a sacramental and a prayer, **not a power-up or a weapon**.
 
 - **When:** at the evening Rosary bell (every path), or any time at a devotion stop (a Marian statue is a natural spot). Costs 0 Vigor; takes one clock step for 5 decades.
-- **Mysteries by weekday** (St. John Paul II, *Rosarium Virginis Mariae* 38): **Joyful** Monday and Saturday · **Sorrowful** Tuesday and Friday · **Glorious** Wednesday and Sunday · **Luminous** Thursday. Optional custom toggle: Joyful on Advent/Christmas Sundays, Sorrowful on Lent Sundays. The game picks today's set and lets you change it, as the Pope notes the pattern "is not intended to limit a rightful freedom."
+- **Mysteries by weekday** (St. John Paul II, *Rosarium Virginis Mariae* 38): **Joyful** Monday and Saturday · **Sorrowful** Tuesday and Friday · **Glorious** Wednesday and Sunday · **Luminous** Thursday. **Seasonal custom ON by default:** Joyful Mysteries on Advent and Christmas Sundays; Sorrowful Mysteries on Lent Sundays. The player may still change today's set, as the Pope notes the weekday pattern "is not intended to limit a rightful freedom."
 - **Bead UI:** a GBC-style loop of beads at the bottom of the screen. The current bead glows. Each decade opens with the mystery's name, a pixel vignette (no depiction of Christ as an actor; scenes are tableaux or symbols), and a **short meditation** (one or two sentences plus a Scripture reference). Press A to advance bead by bead, or choose **Pray calmly**: the beads advance on their own at a slow, steady pace with the prayer text shown. **There's no reward for rushing**: a rushed Rosary (mashing A) gives the same points as a calm one, but only *Pray calmly* or reading each meditation grows Constancy.
 - **Gains:** +5 Prayer (5 decades), +1 Purity of heart, +1 Humility, Constancy ▲. October and Oct 7: Constancy gain doubled. A decade inside an encounter steadies Peace (§10).
 - **Path variants:**
@@ -274,20 +273,20 @@ Real formation, mapped to game ranks. **Two facts shape everything:**
 1. **You're a full friar or monk from your first profession**, not only at priesthood. Priesthood is a *different call within* the life, not a "higher" holiness.
 2. **Brothers are a complete vocation.** The lay brother (CFR), the cooperator brother (Dominican), and the lay brother (Carmelite) are not a lower tier. The game has two **tracks** after profession: the **Brother track** and the **Clerical track** (toward diaconate and priesthood). Both have their own capstones and the same maximum Spiritual Health and virtues.
 
-**Time compression (proposal):** 1 real formation year ≈ 2 in-game weeks. All stage lengths below are real, and the in-game lengths are open to tuning.
+**Time compression (settled):** **1 real formation year ≈ 1 in-game month** (about four game weeks). Real stage lengths stay accurate; the in-game gates below scale from that rule. A full playthrough therefore spans roughly the same *number of formation years*, but each year takes a month of game days instead of two weeks.
 
 ### Franciscan Friars (CFR-style)
 
 | Rank | Real stage | In game | Address | Gate to petition |
 |---|---|---|---|---|
 | R0 | Discernment ("Come & See" ×2) | The spawn + entry tasks (§2) | "Postulant" after reception | Finish the 3 counsels tasks |
-| R1 | **Postulancy** (~10 months) | Simple lay/work clothes (exact CFR postulant dress unverified: open question); Mass, Hours, Holy Hour, outreach | Postulant | 2 weeks + Formation XP + SH ≥ 60 |
-| R2 | **Novitiate** (receives the habit) | Investiture scene; gray habit, cord, religious name; deeper prayer and study | Brother | 3 weeks + Chapter approval |
-| R3 | **Temporary profession** (vows renewed yearly, at least 5 years) | First vows ceremony; mission rotations (a mission friary event) | Brother | 5 renewals (1 per week) + SH ≥ 60 |
+| R1 | **Postulancy** (~10 months) | **Simple postulant outfit** (modest, original, not a habit); Mass, Hours, Holy Hour, outreach | Postulant | ~3 weeks (~10/12 of a month) + Formation XP + SH ≥ 60 |
+| R2 | **Novitiate** (~1 year; receives the habit) | Investiture scene; gray habit, cord, **religious name from saint list**; deeper prayer and study | Brother | **1 month** + Chapter approval |
+| R3 | **Temporary profession** (vows renewed yearly, at least 5 years) | First vows ceremony; mission rotations (a mission friary event) | Brother | **5 renewals (1 per month)** + SH ≥ 60 |
 | R4 | **Perpetual profession** | Solemn ceremony; **choose track** | Brother | — |
 | R5b | **Brother track**: lay brother | Porter, cook, street evangelist, later **Local Servant** (a brother can be superior, per CFR) | Brother | Capstone: lead the house as Local Servant for a season |
 | R5c | **Clerical track**: priestly studies (begin after perpetual vows, per CFR) | Seminary classes, instituted lector and acolyte | Brother | Study XP + SH |
-| R6c | **Diaconate** | Ordination scene; Gospel, homily, Benediction | Brother (house) / Deacon (altar) | Preaching XP + time |
+| R6c | **Diaconate** | Ordination scene; Gospel, homily, Benediction | **Brother (house) / Deacon (altar)** | Preaching XP + time |
 | R7c | **Priesthood** | Ordination scene; **celebrates Mass**, hears confessions | Father | Capstone |
 
 ### Dominican Friars (Province of St. Joseph–style)
@@ -295,12 +294,12 @@ Real formation, mapped to game ranks. **Two facts shape everything:**
 | Rank | Real stage | In game | Address | Gate |
 |---|---|---|---|---|
 | R0 | Inquiry, aspirancy, application | Spawn + entry tasks | — | 3 counsels tasks |
-| R1 | **Postulancy** (a few weeks) | Lay clothes (no habit until the Aug 8 clothing; exact postulant dress unverified); house of studies orientation | Postulant | 1 week + SH ≥ 60 |
-| R2 | **Novitiate** (1 year; clothed in the habit on Aug 8, St. Dominic) | White habit, religious name; chant lessons, Constitutions, lives of Dominican saints | Brother | 2 weeks + Chapter |
-| R3 | **Simple profession** (Aug 15; 3 years + a 4th renewal) | Studentate begins: **2 years philosophy, then theology** (Summa thread, §16); **choose track** (clerical or cooperator) | Brother | 4 weeks + Study XP |
+| R1 | **Postulancy** (a few weeks) | **Simple postulant outfit** (modest, original, not a habit); house of studies orientation until the Aug 8 clothing | Postulant | ~1 week + SH ≥ 60 |
+| R2 | **Novitiate** (1 year; clothed in the habit on Aug 8, St. Dominic) | White habit, **religious name from saint list**; chant lessons, Constitutions, lives of Dominican saints | Brother | **1 month** + Chapter |
+| R3 | **Simple profession** (Aug 15; 3 years + a 4th renewal) | Studentate begins: **2 years philosophy, then theology** (Summa thread, §16); **choose track** (clerical or cooperator) | Brother | **~3 months** + Study XP |
 | R4 | **Solemn profession** (usually the 5th studentate year) | Kneels before the Prior Provincial with the Constitutions | Brother | — |
 | R5b | **Cooperator brother** (1 more year of formation) | Teaching, sacristy, hospital ministry, preaching (non-liturgical) | Brother | Capstone: a mission in the city |
-| R5c / R6c | **Diaconate** (often with solemn vows, 5th year) → a **year as deacon in a parish** | Gospel, homily, Benediction; parish deacon year in the DC-like city | Brother / Deacon | Preaching XP |
+| R5c / R6c | **Diaconate** (often with solemn vows, 5th year) → a **year as deacon in a parish** | Gospel, homily, Benediction; parish deacon year in Capitol City | **Brother (house) / Deacon (altar)** | Preaching XP |
 | R7c | **Priesthood** (after 5–7 years of studies) | Celebrates Mass, hears confessions, preaches | Father | Capstone |
 
 ### Carmelite Monks (Wyoming-style)
@@ -308,15 +307,17 @@ Real formation, mapped to game ranks. **Two facts shape everything:**
 | Rank | Real stage | In game | Address | Gate |
 |---|---|---|---|---|
 | R0 | Discernment retreat → **observership** (guest house, then inside the enclosure) | Spawn at the guest house + entry tasks | — | 3 counsels tasks |
-| R1 | **Postulancy** (up to 1 year; clothed in brown postulant robes and a larger postulant scapular; "considered a brother") | Postulant robes; classes and daily spiritual direction | Postulant (house: Brother) | 2 weeks + SH ≥ 60 |
-| R2 | **Novitiate** (2 years; full brown wool habit, new religious name, e.g. "Br. ___ of Jesus") | Hermitage cell, Rule and Constitutions, Carmelite Doctors | Brother | 4 weeks + Chapter |
-| R3 | **Temporary profession** (3 years; long scapular and profession crucifix) | Greater responsibility, ranch work; **track** (lay brother or choir monk toward priesthood). *When the Wyoming monks discern this is unconfirmed: open question* | Brother | 6 weeks |
+| R1 | **Postulancy** (up to 1 year; clothed in brown postulant robes and a larger postulant scapular; "considered a brother") | Postulant robes; classes and daily spiritual direction | Postulant (house: Brother) | **1 month** + SH ≥ 60 |
+| R2 | **Novitiate** (2 years; full brown wool habit, new religious name, e.g. "Br. ___ of Jesus") | Hermitage cell, Rule and Constitutions, Carmelite Doctors; **religious name from saint list** | Brother | **2 months** + Chapter |
+| R3 | **Temporary profession** (3 years; long scapular and profession crucifix) | Greater responsibility, ranch work; **choose track here** (lay brother or choir monk toward priesthood) | Brother | **3 months** |
 | R4 | **Perpetual profession** (after 6 years total; "usque ad mortem") | Solemn ceremony, white mantle at feasts | Brother | — |
 | R5b | **Lay brother** ("sanctifies his day through manual labor") | Stable master, cobbler, gardener; Brother Lawrence reading thread | Brother | Capstone: a year of hidden faithfulness (Little Way) |
 | R6c / R7c | **Diaconate → priesthood** (priests and seminarians wear the **corona** tonsure) | Celebrates the sung conventual Mass in the traditional Carmelite rite; spiritual direction | Father | Capstone |
-| — | **Hermit-monk** (optional late call, "alone with the Alone") | Post-game epilogue, not a rank | — | Open question |
+| — | **Hermit-monk** (optional late call, "alone with the Alone") | **Included** as a post-game epilogue, not a rank — quiet, reverent, optional | — | After perpetual profession + petition |
 
-**Never-ending:** after the final rank, the game continues as "ongoing formation." There's no "beat the game" because holiness isn't finished.
+**Never-ending:** after the final rank (or hermit epilogue), the game continues as "ongoing formation." There's no "beat the game" because holiness isn't finished.
+
+**Women's communities** (Poor Clares, Dominican nuns/sisters, Discalced Carmelite nuns) are planned as **future paths** — see the short roadmap in NOTES.md. Nothing more in this release.
 
 ## 13. Liturgical roles by rank
 
@@ -330,7 +331,7 @@ Only a **validly ordained priest** celebrates Mass (Code of Canon Law c. 900). T
 | **Deacon** | **Proclaims the Gospel**, may preach the homily at the priest's direction, assists at the altar, announces the intentions, assists with Communion, purifies vessels (GIRM 171) | Leads the Office | Exposition and Benediction of the Blessed Sacrament |
 | **Priest** | **Celebrates Mass** (unlocks here) | Leads | Hears confessions, anoints the sick, gives blessings |
 
-**How a priest's Mass plays:** you prepare the homily (Preaching gameplay), vest with the vesting prayers (a calm sequence), and then the Mass is a **reverent non-interactive scene** with the bell at the consecration. No input, no score.
+**How a priest's Mass plays (settled):** only **homily prep** (Preaching gameplay) and **vesting** (the vesting prayers, a calm sequence) are playable. The Mass itself is a **reverent non-interactive scene** with the bell at the consecration. No input, no score, no way to "fail" the Mass. The words of consecration are never a button press.
 
 ## 14. Failure states
 
@@ -342,8 +343,8 @@ None of these mock the sacred, and none are "game over."
 | **Dryness (the Dark Night)** | **Not caused by failure.** A season event that can come to faithful players, more often near a rank transition or a new mansion (§16) | Fervor stays low, prayer text shows aridity lines ("The psalms feel like dust today."). SH is not reduced | **Keep praying.** Each faithful day gives double Constancy and +Fortitude; finishing the season unlocks Dark Night stanza pages. Spiritual direction explains the signs, without diagnosing |
 | **Overextension** | Max work, minimum prayer for days | Fervor slips each morning | Rebalance: adoration, rest |
 | **Stumble** | Peace hits 0 in an Inner encounter | Examen at night | Confession scene restores Peace |
-| **Delay of vows** | Petitioning with low SH, low Obedience, or no Chapter approval | The superior asks you to wait another week or two (realistic) | Meet the gates |
-| **Discerning out** | Only by player choice, offered gently after a long Tepid stretch or at any petition | A respectful ending: "Not every postulant is called here, and that's not failure." Save kept | New game, or continue if chosen. *Whether this exists at all is an open question* |
+| **Delay of vows** | Petitioning with low SH, low Obedience, or no Chapter approval | The superior asks you to wait another month (realistic under the 1-year≈1-month scale) | Meet the gates |
+| **Discerning out** | **Included.** Only by player choice, offered gently after a long Tepid stretch or at any petition | A respectful ending framed as a **good outcome of honest discernment**: "Not every postulant is called here, and finding that out is grace, not failure." Save kept | New game on another path, or continue if you decline the ending |
 
 **Sickness** is never a failure: you rest in the infirmary, are excused from everything, and can quietly offer it up.
 
@@ -363,7 +364,7 @@ CJ wants **many** statues and crucifixes throughout every house and city. They'r
 
 ## 16. Reading threads
 
-Each path has a **reading thread**, a slow progression through a saint's great work, shown in a **scroll/codex UI** (a parchment page in GBC style with a small illuminated initial). Pages unlock through fitting moments, never by grinding. Quotes in game are short; translations and licensing are in NOTES.md.
+Each path has a **reading thread**, a slow progression through a saint's great work, shown in a **scroll/codex UI** (a parchment page in GBC style with a small illuminated initial). Pages unlock through fitting moments, never by grinding. Quotes in game are short. **Settled text sources** (details in NOTES.md): Canticle = public-domain translation or our plain paraphrase (no New City Press / FA:ED text); Summa = 1920 English Dominican translation from a public-domain scan (not New Advent's pages); Interior Castle = Stanbrook (1912/1921); Dark Night = Peers 1959 (stated PD in the US), short quotes.
 
 ### Franciscan: The Canticle of the Creatures (St. Francis, c. 1225; the last stanza near his death in 1226)
 
@@ -388,8 +389,8 @@ Each stanza unlocks at a fitting moment and adds a weather/time tie-in to the ov
 - **Study sessions** in the library each work through one famous article (2 Vigor): I q.1 a.1 (is sacred doctrine needed?), **I q.2 a.3 (whether God exists: the Five Ways)**, I q.13 (the divine names), I-II q.2–3 (what happiness is), I-II q.55 (what a virtue is), II-II q.1–2 (faith), II-II q.17 (hope), II-II q.23 (charity), II-II q.47 (prudence), II-II q.161 (humility), III q.1 a.2 (fittingness of the Incarnation).
 - **The article method is the game mechanic:** Disputation encounters (§10) follow objection → sed contra → respondeo → replies. Class, teaching, and street preaching in the DC-like city all use it.
 - **Gates:** finishing the Prima Pars set opens *teaching a class*; the Secundae Secundae virtue set opens *street preaching*; the Tertia Pars set is required to petition for the diaconate (clerical) or the city mission (cooperator).
-- **Capstone: "straw."** Late in the path, after Mass, Thomas's tradition is told (in December 1273 he stopped writing, saying that what he'd written seemed like straw compared with what he had seen). The player chooses to **set down the pen**. Your Study is complete, and Humility jumps. The lesson: learning serves love.
-- **Saint scenes:** the angels' girdle (purity of heart), the crucifix in the study ("You have written well of me, Thomas," told as tradition), with the crucifix only as a reverent backdrop.
+- **Capstone: "straw."** Late in the path, after Mass, the scene is framed as tradition: **"It is told that…"** in December 1273 Thomas stopped writing, saying that what he had written seemed like straw compared with what he had seen. The player chooses to **set down the pen**. Your Study is complete, and Humility jumps. The lesson: learning serves love.
+- **Saint scenes:** the angels' girdle (purity of heart), the crucifix in the study ("You have written well of me, Thomas," also told as tradition), with the crucifix only as a reverent backdrop.
 
 ### Carmelite: The Interior Castle (St. Teresa of Ávila) + Dark Night (St. John of the Cross) + the Little Way (St. Thérèse)
 

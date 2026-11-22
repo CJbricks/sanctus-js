@@ -125,6 +125,28 @@ Tests live next to the code (`src/lib/*.test.js`) and run in **Node**, not a bro
 | D16 | 2026-11-21 | **Many** statues (Sorrows, Victory/Rosary, Undoer of Knots) and crucifixes as devotion stops; never items | CJ's direction |
 | D17 | 2026-11-21 | Reading threads: Canticle (Franciscan), Summa (Dominican), Interior Castle + Dark Night + Little Way (Carmelite); mystical stages are **read, not achieved** | CJ's direction; reverence |
 | D18 | 2026-11-21 | In-game text uses **public-domain** translations or our own paraphrase until permissions are confirmed | Licensing (§4) |
+| D19 | 2026-11-21 | Repo is **`CJbricks/sanctus-js`** (settled) | CJ answer #1 |
+| D20 | 2026-11-21 | Stack matches Brick City; **patterns only — never copy Brick City code or content** | CJ answer #2 |
+| D21 | 2026-11-21 | **Time compression:** 1 real formation year ≈ **1 in-game month** (not 2 weeks). Rank gates in GAME_RULES §12 rescaled | CJ answer #3 |
+| D22 | 2026-11-21 | **Religious name at novitiate: ON**, chosen from a saint list (never typed) | CJ answer #4 |
+| D23 | 2026-11-21 | **Deacon address:** "Brother" in the house, "Deacon" at the altar | CJ answer #5 |
+| D24 | 2026-11-21 | Franciscan and Dominican postulants wear a **simple postulant outfit** (modest, original, not a habit) until investiture; Carmelites keep sourced brown postulant robes + larger scapular | CJ answer #6 |
+| D25 | 2026-11-21 | Carmelite lay-brother vs. priesthood choice at **temporary profession** | CJ answer #7 |
+| D26 | 2026-11-21 | **Dominican horarium** taken from the published academic-year schedule of the Priory of the Immaculate Conception (Dominican House of Studies, Washington, DC); adapted to fictional House of St. Raymond. Cited below | CJ answer #8 + research |
+| D27 | 2026-11-21 | **Discerning-out ending: INCLUDE** — gentle, respectful, a good outcome of honest discernment | CJ answer #9 |
+| D28 | 2026-11-21 | Carmelite **hermit-monk epilogue: INCLUDE** | CJ answer #10 |
+| D29 | 2026-11-21 | Women's communities (Poor Clares, Dominican nuns/sisters, Discalced Carmelite nuns) = **future paths**; short roadmap only for now | CJ answer #11 |
+| D30 | 2026-11-21 | Companion/rival story **may include discerning out** partway — realistic and kind | CJ answer #12 |
+| D31 | 2026-11-21 | **Encounters Option C FINAL** (Unified: Inner, Outer, Dominican Disputation); A/B moved to "considered" | CJ answer #13 |
+| D32 | 2026-11-21 | Priest Mass: reverent **non-interactive** scene; only **homily prep** and **vesting** playable | CJ answer #14 |
+| D33 | 2026-11-21 | **Canticle:** public-domain translation or our plain paraphrase (no New City Press / FA:ED text) | CJ answer #15 |
+| D34 | 2026-11-21 | **Summa:** 1920 English Dominican translation from a **public-domain scan** (not New Advent's pages); short quotes | CJ answer #16 |
+| D35 | 2026-11-21 | **Interior Castle:** **Stanbrook** translation (1912/1921) | CJ answer #17 |
+| D36 | 2026-11-21 | **Dark Night:** **Peers 1959** (stated PD in the US); short quotes | CJ answer #18 |
+| D37 | 2026-11-21 | St. Thomas **"straw" quote** framed as tradition ("It is told that…") | CJ answer #19 |
+| D38 | 2026-11-21 | **Chant:** arrangements of public-domain Gregorian melodies allowed, plus original chant-inspired music, in the chiptune engine | CJ answer #20 |
+| D39 | 2026-11-21 | Fictional names kept: St. Juniper Friary / Five Bridges City; House of St. Raymond / Capitol City; Monastery of St. Elijah / Thornback | CJ answer #22 |
+| D40 | 2026-11-21 | Seasonal Rosary custom **ON by default** (Joyful Sundays in Advent/Christmas; Sorrowful Sundays in Lent) | CJ answer #23 |
 
 ## 3. Facts checked and corrected from the original direction
 
@@ -138,7 +160,9 @@ Tests live next to the code (`src/lib/*.test.js`) and run in **Node**, not a bro
 | Carmelites: "Liturgy of the Hours" | They pray the traditional **Divine Office in Latin** (Matins, Lauds, Prime, Terce, Sext, None, Vespers, Compline) and a sung Latin Carmelite conventual Mass with chant | Carmelite bells use the traditional Hour names |
 | "Rising through brother/deacon to priest and full friar" | You're a full friar/monk at first profession. "Brother" isn't a step below priest; lay/cooperator brothers are a complete vocation. CFR priestly studies begin after perpetual vows; Dominican clerical brothers are ordained deacons around solemn vows | Two tracks after profession (GAME_RULES §12) |
 | "Postulants accept each vow" | No vows in postulancy; vows come at the end of the novitiate (temporary/simple), then solemn/perpetual | Entry tasks *embrace* the counsels; vows are professed later |
+| CFR / Dominican postulant dress unknown | Exact CFR and Province of St. Joseph postulant clothing not found in the public sources we checked | **Simple postulant outfit** (modest, original, clearly not a habit) until investiture (CJ). Carmelites keep sourced brown postulant robes + larger scapular |
 | CFR superior "guardian" | CFR call the local superior the **Local Servant** (and the General Servant) | "Local Servant" |
+| Dominican house-of-studies times "approximate" | Priory of the Immaculate Conception (DHS, Washington, DC) publishes its full academic-year and summer horarium | Weekday academic-year bells used for House of St. Raymond (GAME_RULES §3); Sunday/summer variants noted |
 | Rosary weekdays | Confirmed by *Rosarium Virginis Mariae* 38: Joyful Mon/Sat, Sorrowful Tue/Fri, Glorious Wed/Sun, Luminous Thu | As sourced |
 | Our Lady Undoer of Knots feast | A devotion, not a liturgical feast. The painting (c. 1700, Johann Georg Melchior Schmidtner) is in St. Peter am Perlach, Augsburg; Pope Francis spread it from Argentina after receiving a postcard of it (he said in 2017 he'd never been to Augsburg) | No calendar date |
 | Our Lady of Victory | Instituted by St. Pius V after Lepanto (Oct 7, 1571) as Our Lady of Victory; renamed Our Lady of the Rosary by Gregory XIII | Oct 7 + October Rosary month |
@@ -146,12 +170,12 @@ Tests live next to the code (`src/lib/*.test.js`) and run in **Node**, not a bro
 
 ## 4. Texts and translations (licensing)
 
-| Work | Sources fetched | Translation and status | Plan |
+| Work | Sources fetched | Translation and status | Settled plan (CJ 2026-11-21) |
 |---|---|---|---|
-| **Canticle of the Creatures** (St. Francis, c. 1225 near San Damiano; by tradition the "pardon" stanza was added to make peace between Assisi's bishop and mayor, and "Sister Bodily Death" near his death on Oct 3, 1226) | Siena College PDF (bilingual, Umbrian original + English) and the official OFM 800th-anniversary card (`ofm.org/uploads/Cantico_EN.pdf`) | **Both are the same translation**: *Francis of Assisi: Early Documents*, vol. I (Armstrong, Hellman, Short; New City Press, 1999), pp. 113–114, the edition Pope Francis cites in *Laudato Si'*. It's copyrighted, and the OFM card shows no license. The Siena copy has OCR errors; the OFM card has small typos ("expecialy"). The **Umbrian original** (13th c.) is public domain. Note: Francis's "per" can mean "through," "for," or "by," which explains why translations differ | In game: the Umbrian line + a **public-domain English translation** (e.g. Paschal Robinson, *The Writings of Saint Francis of Assisi*, 1906; to verify that it includes the Canticle) or our own plain paraphrase. **Open question:** ask New City Press for permission to use the FA:ED wording |
-| **Summa Theologiae** (St. Thomas) | New Advent `/summa/` and aquinas.cc (Aquinas Institute) | New Advent: the **1920 "Second and Revised Edition," literally translated by Fathers of the English Dominican Province** (public domain in the US as a pre-1929 publication), but the *online edition* says "Copyright © 2017 by Kevin Knight." Aquinas.cc: **Shapcote** translation "edited and revised by The Aquinas Institute," © Aquinas Institute, Inc. (2018); free to read online, but no reuse license found | Take the 1920 text from a **public-domain scan** (not New Advent's pages); quote short lines only. **Open question:** permission from New Advent/Aquinas Institute if CJ wants their editions |
-| **Interior Castle** (St. Teresa) | `carmelitemonks.org/Vocation/StTeresa-TheInteriorCastle.pdf` | A Google Books scan of the **Rev. John Dalton translation (London: T. Jones, 1852)**, "The Interior Castle; or, The Mansions." Image-only (no text layer). **Public domain** | Use Dalton (or the Stanbrook 1912/1921 translation, also likely PD in the US) for short quotes. **Open question:** confirm the edition CJ prefers |
-| **Dark Night of the Soul** (St. John of the Cross) | `basilica.ca/…Dark night of the soul.pdf` (Cloudflare blocked curl; read via the fetch tool) | **E. Allison Peers, 3rd revised ed. (Image Books, 1959)**. The electronic edition's preface (Harry Plantinga, 1994) says it was scanned from an "uncopyrighted 1959 Image Books third edition… and is therefore in the public domain." Peers died in 1952, so UK/EU status may differ | Short quotes only. **Open question:** confirm US-only PD is enough, or use David Lewis's 1864 translation (PD everywhere) |
+| **Canticle of the Creatures** (St. Francis, c. 1225 near San Damiano; by tradition the "pardon" stanza was added to make peace between Assisi's bishop and mayor, and "Sister Bodily Death" near his death on Oct 3, 1226) | Siena College PDF (bilingual, Umbrian original + English) and the official OFM 800th-anniversary card (`ofm.org/uploads/Cantico_EN.pdf`) | FA:ED / New City Press wording is copyrighted. The **Umbrian original** (13th c.) is public domain. | **Public-domain English translation** (e.g. Paschal Robinson 1906, once verified) **or our own plain paraphrase**. No New City Press / FA:ED text. |
+| **Summa Theologiae** (St. Thomas) | New Advent `/summa/` and aquinas.cc (Aquinas Institute) | The **1920 English Dominican Province** translation is PD in the US as a pre-1929 publication; New Advent's *website* layers a modern copyright notice. Aquinas Institute Shapcote is © 2018. | **1920 English Dominican translation from a public-domain scan** (not New Advent's pages). Short quotes only. |
+| **Interior Castle** (St. Teresa) | Wyoming monks' Dalton PDF; Stanbrook editions exist | Dalton 1852 is PD. **Stanbrook 1912/1921** is the chosen edition. | **Stanbrook (1912/1921)** for short quotes. |
+| **Dark Night of the Soul** (St. John of the Cross) | Peers electronic edition (Plantinga preface: uncopyrighted 1959 Image Books 3rd ed.) | Peers died 1952; stated PD in the US; UK/EU may differ. | **Peers 1959**, short quotes (US PD as stated). |
 | **Story of a Soul** (St. Thérèse) | Not fetched | Thomas N. Taylor's 1912 translation is PD in the US; modern ICS translation is copyrighted | Use Taylor or paraphrase |
 
 **What the texts taught the design:**
@@ -186,17 +210,18 @@ Tests live next to the code (`src/lib/*.test.js`) and run in **Node**, not a bro
 - "Shod" friars (Gumbley, O.P.): http://www.domcentral.org/library/spir2day/863836gumbley.html
 - St. Dominic (Benedict XVI): https://www.vatican.va/content/benedict-xvi/en/audiences/2010/documents/hf_ben-xvi_aud_20100203.html
 - St. Thomas Aquinas (Benedict XVI): https://www.vatican.va/content/benedict-xvi/en/audiences/2010/documents/hf_ben-xvi_aud_20100602.html
-- St. Thomas Aquinas (Catholic Encyclopedia, 1912; the angels' girdle; Reginald of Piperno): https://www.newadvent.org/cathen/14663b.htm. *The "straw" saying is from the early biographies; a primary-source citation is still to add (open question).*
-- Summa (New Advent, 1920 English Dominican translation): https://www.newadvent.org/summa/ · Five Ways: https://www.newadvent.org/summa/1002.htm
-- Summa (Aquinas Institute, Shapcote, Latin/English): https://aquinas.cc/la/en/~ST.I · copyright page: https://www.aquinasinstitute.org/_files/ugd/9cabc9_5727791d0c1b4340bd9ffbe24cf8d4e0.pdf
+- St. Thomas Aquinas (Catholic Encyclopedia, 1912; the angels' girdle; Reginald of Piperno): https://www.newadvent.org/cathen/14663b.htm. *The "straw" saying is from the early biographies; in-game we frame it as tradition ("It is told that…"). A primary-source citation can still be added later for NOTES, but playtext no longer waits on it.*
+- Summa (1920 English Dominican translation — use a PD scan, not the New Advent site HTML): catalog reference https://www.newadvent.org/summa/ · Five Ways: https://www.newadvent.org/summa/1002.htm
+- Summa (Aquinas Institute, Shapcote, Latin/English — **not** our quote source): https://aquinas.cc/la/en/~ST.I
+- **Dominican House of Studies horarium** (Priory of the Immaculate Conception, Washington, DC) — public academic-year and summer schedules: https://dhspriory.org/prayer/ · confirmed in the PFIC Student Handbook 2025–2026 (Lauds 7:00, Mass ~7:20, Rosary noon then midday prayer, Office of Readings & Vespers 5:30, Compline 9:00 Mon–Thu): https://dhs.edu/wp-content/uploads/2025/08/Student-Handbook-2025-2026.pdf
 
 **Carmelite**
 - Carmelite Monks of Wyoming (cloistered, Discalced reform, public association "in itinere," Latin Mass with chant, lay brothers and priests, possible hermit life): https://carmelitemonks.org/
 - Formation process (observership, postulancy up to 1 year in brown robes with a larger scapular, 2-year novitiate with a religious name, 3 years of temporary vows with the long scapular, perpetual vows after 6 years): https://www.carmelitemonks.org/Vocation/FormationProcess.php
 - The Holy Habit (brown wool, cincture, rosary at left, cowl, scapular over the cowl, sandals, profession crucifix, tonsure and the priests' corona, white mantle, work habit): https://www.carmelitemonks.org/HolyHabit.php
 - Horarium (Midnight Matins/Lauds through Compline; two hours of mental prayer; common Rosary): https://www.carmelitemonkshorarium.org/
-- Interior Castle (Dalton, 1852 scan): https://www.carmelitemonks.org/Vocation/StTeresa-TheInteriorCastle.pdf
-- Dark Night (Peers, 1959): https://basilica.ca/documents/2016/10/St.%20John%20of%20the%20Cross-Dark%20night%20of%20the%20soul.pdf
+- Interior Castle (Dalton 1852 scan — reference only; **game uses Stanbrook 1912/1921**): https://www.carmelitemonks.org/Vocation/StTeresa-TheInteriorCastle.pdf
+- Dark Night (Peers, 1959 — **game quote source**): https://basilica.ca/documents/2016/10/St.%20John%20of%20the%20Cross-Dark%20night%20of%20the%20soul.pdf
 - Carmelites as mendicant friars (O.Carm.): https://www.ocarm.org/en/our-way-of-life/who-are-the-carmelites · history: https://www.ocarm.org/en/our-way-of-life/history
 - St. Teresa (Benedict XVI): https://www.vatican.va/content/benedict-xvi/en/audiences/2011/documents/hf_ben-xvi_aud_20110202.html
 - St. John of the Cross (Benedict XVI): https://www.vatican.va/content/benedict-xvi/en/audiences/2011/documents/hf_ben-xvi_aud_20110216.html
@@ -220,26 +245,20 @@ Tests live next to the code (`src/lib/*.test.js`) and run in **Node**, not a bro
 
 ## 6. Open questions for CJ
 
-1. **Repo name**: `CJbricks/sanctus`?
-2. **Stack**: confirm it matches Brick City (Next.js JS, pixi.js, Chakra UI, Vercel, localStorage, Vitest), and whether any Brick City *code* may be copied or only its patterns.
-3. **Time compression**: is ~2 in-game weeks per real formation year right? (It sets how long a full playthrough takes.)
-4. **Religious name at novitiate**: on (picked from a saint list, never typed) or off (role titles only)?
-5. **Deacon address**: "Brother" in the house and "Deacon" at the altar, or "Deacon" everywhere?
-6. **Postulant dress**: Carmelites are sourced (brown postulant robes + larger scapular). For CFR and Dominican postulants, the exact dress wasn't found; is simple lay clothes OK until investiture?
-7. **Carmelite track timing**: when does a Wyoming monk discern lay brother vs. priesthood? Not on their site; ask them or keep the game's choice at temporary profession?
-8. **Dominican horarium**: the house of studies' exact times weren't published; OK to use the approximate schedule?
-9. **Discerning out**: include a gentle "this isn't my calling" ending, or leave it out?
-10. **Hermit-monk epilogue** for Carmelites: include?
-11. **Women's communities** (Poor Clares, Dominican nuns/sisters, Discalced Carmelite nuns) as future paths?
-12. **Rival**: should the companion stay all game, or could his story include discerning out (realistic, poignant)?
-13. **Encounters**: approve Option C (Unified Encounters with Inner, Outer, and Dominican Disputation)?
-14. **Mass at priest rank**: is a fully non-interactive scene right, with only homily prep and vesting playable?
-15. **Canticle text**: ask New City Press for the FA:ED translation (the OFM's), or use a public-domain translation / our own paraphrase?
-16. **Summa text**: use the 1920 English Dominican translation from a public-domain scan, or ask New Advent / the Aquinas Institute?
-17. **Interior Castle**: Dalton (1852, from the Wyoming monks' PDF) or Stanbrook (1912/1921)?
-18. **Dark Night**: Peers 1959 (stated public domain in the US) or Lewis 1864?
-19. **"Straw" quote**: OK to tell it as tradition ("It is told that…") until we add a primary-source citation?
-20. **Chant**: original chant-inspired melodies only, or arrangements of public-domain Gregorian melodies?
-21. **Reference images**: the uploads (Franciscan 4, Aquinas 3, Carmelite 6 + 3 saint portraits) still need copying into `docs/concepts/` by the main agent; more are wanted (see each folder's README).
-22. **Fictional names**: OK with St. Juniper Friary / Five Bridges City, House of Studies of St. Raymond / Capitol City, Monastery of St. Elijah / Thornback high country?
-23. **Seasonal Rosary custom**: turn on Joyful/Sorrowful Sundays in Advent/Lent by default?
+Most of the 2026-11-21 list is settled (see decision log D19–D40). Only this remains open:
+
+1. **Reference images** (was #21): the uploads (Franciscan 4, Aquinas 3, Carmelite 6 + 3 saint portraits) still need copying into `docs/concepts/`. CJ will re-send them. More are wanted (see each folder's README). Until then, STYLE.md guides stay provisional against the photos.
+
+*(Former #8 — Dominican horarium — is **resolved**: the Priory of the Immaculate Conception at the Dominican House of Studies publishes its schedule at https://dhspriory.org/prayer/ and in the PFIC Student Handbook. GAME_RULES §3 and WORLD.md now use that weekday academic-year pattern for the House of St. Raymond.)*
+
+## 7. Roadmap: future women's paths (short)
+
+CJ wants these as **later callings**, not in the first build. Same theme rules (fictional houses and towns; original art; reverence):
+
+| Future path | Inspired by (real) | Fictional home (TBD when designed) | Notes |
+|---|---|---|---|
+| **Poor Clares** | Order of St. Clare (Franciscan Second Order) | A small enclosed monastery near Five Bridges City | Contemplative sister to the Franciscan friars path |
+| **Dominican nuns / sisters** | Nuns of the Order of Preachers; apostolic Dominican sisters | A Capitol City monastery or congregation house | Study + contemplation; Disputation / teaching variants |
+| **Discalced Carmelite nuns** | OCD nuns (Teresa's reform) | A Thornback-area monastery | Closest sister to the Carmelite Monks path; Enclosure and Interior Castle thread |
+
+Until a dedicated design pass, do **not** add ranks, maps, or sprites for these. The Choose Your Calling screen stays three paths.
