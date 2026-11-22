@@ -52,6 +52,7 @@ Read this after cloning. It explains the code that actually runs today — not t
 | `src/game/engine.js` | Pixi `Application` + scene swap (title ↔ calling). |
 | `src/game/scenes/*.js` | What you see: title logo, calling list — drawn with `Graphics`, no PNGs. |
 | `src/game/draw.js` | Shared pixel helpers (rects, text, character placeholder). |
+| `src/game/art/orderEmblems.js` | Choose Your Calling emblems: pixel grids + Pixi draw helper. |
 | `src/game/audio/engine.js` | Tiny GB-style Web Audio stub (pulse + noise). Unlocks only after a gesture. |
 | `src/lib/save.js` | `serialize` / `deserialize` / **`migrate`** / `loadSave` / `writeSave`. SSR-safe. |
 | `src/lib/callings.js` | The three paths' menu data. |
@@ -88,12 +89,32 @@ Keyboard map: Arrows/WASD move · Z/Enter/Space = A · X/Escape = B · M mute. T
 ### How to run tests
 
 ```bash
-npm test          # Vitest: save round-trip + migrate, input map, callings data
+npm test          # Vitest: save, input, callings, order emblems (pure data)
 npm run lint      # ESLint with Next 16 flat config
 npm run build     # production build (same as Vercel)
 ```
 
 Tests live next to the code (`src/lib/*.test.js`) and run in **Node**, not a browser — because save/input/callings are pure functions.
+
+### How order emblems are drawn (Choose Your Calling)
+
+The vocation menu does **not** load PNGs. Each religious family has a small original symbol in `src/game/art/orderEmblems.js`:
+
+| Path | Emblem | Meaning |
+|---|---|---|
+| Franciscan | Calm **Wolf of Gubbio** | The wolf St. Francis befriended — gentle, never snarling |
+| Dominican | **Hound with a lit torch** | Bl. Jane of Aza's dream; the *Domini canes* ("hounds of the Lord") pun |
+| Carmelite | **Clasped hands in prayer** | Contemplation |
+
+**How the pixels work (beginner path):**
+
+1. Each emblem is a **32×32 grid of characters** in the source file (`.` = empty, letters = colors).
+2. `pixelsFromGrid()` turns those strings into a list of `{ x, y, color }`.
+3. `drawOrderEmblem()` uses Pixi `Graphics` to fill **one 1×1 rectangle per pixel** on the 320×288 canvas. That is nearest-neighbor pixel art — no blurry scaling inside the sprite.
+4. The selected row gets a gold frame and a soft idle: torch flame flicker, wolf tail tip, or a glow on the hands. Unselected emblems stay on frame 0 so the screen stays calm.
+5. Pure helpers (`getEmblemDescriptor`, `pixelsForEmblem`) are unit-tested in Node; Pixi is only needed to paint.
+
+These are **original drawings**, not real order coats of arms or logos.
 
 ### What to build next (for learners)
 
@@ -147,6 +168,7 @@ Tests live next to the code (`src/lib/*.test.js`) and run in **Node**, not a bro
 | D38 | 2026-11-21 | **Chant:** arrangements of public-domain Gregorian melodies allowed, plus original chant-inspired music, in the chiptune engine | CJ answer #20 |
 | D39 | 2026-11-21 | Fictional names kept: St. Juniper Friary / Five Bridges City; House of St. Raymond / Capitol City; Monastery of St. Elijah / Thornback | CJ answer #22 |
 | D40 | 2026-11-21 | Seasonal Rosary custom **ON by default** (Joyful Sundays in Advent/Christmas; Sorrowful Sundays in Lent) | CJ answer #23 |
+| D41 | 2026-11-22 | Choose Your Calling shows **original Pixi emblems** per path (Wolf of Gubbio, hound+torch, praying hands); no official coats of arms | CJ art briefing |
 
 ## 3. Facts checked and corrected from the original direction
 
