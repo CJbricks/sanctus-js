@@ -16,14 +16,15 @@
  */
 
 import { SAVE_KEY, SAVE_VERSION } from "@/lib/constants";
-import { getCalling } from "@/lib/callings";
+import { getCalling, normalizeCallingId } from "@/lib/callings";
 
 /**
  * Build a brand-new save after the player picks a calling.
  * @param {{ callingId: string }} opts
  */
 export function createNewSave({ callingId }) {
-  const calling = getCalling(callingId);
+  const normalized = normalizeCallingId(callingId) || callingId;
+  const calling = getCalling(normalized);
   if (!calling) {
     throw new Error(`Unknown calling: ${callingId}`);
   }
@@ -69,9 +70,18 @@ export function migrate(data) {
 
   // Unknown future versions: refuse rather than guess.
   if (raw.version !== SAVE_VERSION) return null;
-  if (typeof raw.callingId !== "string" || !getCalling(raw.callingId)) return null;
 
-  const next = createNewSave({ callingId: raw.callingId });
+  // WHY normalizeCallingId:
+  // Early docs/saves may have used the old house name (e.g. "St. Juniper
+  // Friary") as a key. Map those to franciscan / dominican / carmelite
+  // so Resume still works after the Marian house rename.
+  let callingId = normalizeCallingId(raw.callingId);
+  if (!callingId && typeof raw.home === "string") {
+    callingId = normalizeCallingId(raw.home);
+  }
+  if (!callingId) return null;
+
+  const next = createNewSave({ callingId });
 
   if (typeof raw.role === "string") next.role = raw.role;
   if (typeof raw.rank === "string") next.rank = raw.rank;

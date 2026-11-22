@@ -9,6 +9,7 @@ import {
   CALLINGS,
   callingPlaceholderMessage,
   getCalling,
+  normalizeCallingId,
 } from "@/lib/callings";
 
 describe("CALLINGS menu data", () => {
@@ -20,17 +21,20 @@ describe("CALLINGS menu data", () => {
     ]);
   });
 
-  it("names the fictional homes and worlds from the design docs", () => {
+  it("names the Marian homes and worlds from CJ's rename", () => {
     expect(getCalling("franciscan")).toMatchObject({
-      home: "St. Juniper Friary",
+      home: "Our Lady Mary Untier of Knots Friary",
+      homeShort: "Untier of Knots Friary",
       world: "Five Bridges City",
     });
     expect(getCalling("dominican")).toMatchObject({
-      home: "House of St. Raymond",
+      home: "Our Lady of Victory House of Studies",
+      homeShort: "Our Lady of Victory",
       world: "Capitol City",
     });
     expect(getCalling("carmelite")).toMatchObject({
-      home: "Monastery of St. Elijah",
+      home: "Our Lady of Sorrows Monastery",
+      homeShort: "Our Lady of Sorrows",
       world: "Thornback",
     });
   });
@@ -39,9 +43,33 @@ describe("CALLINGS menu data", () => {
     expect(getCalling("benedictine")).toBeNull();
   });
 
-  it("builds a placeholder message that names the house", () => {
+  it("builds a placeholder message that uses the full house name", () => {
     const message = callingPlaceholderMessage("franciscan");
-    expect(message).toContain("St. Juniper Friary");
+    expect(message).toContain("Our Lady Mary Untier of Knots Friary");
     expect(message).toContain("Five Bridges City");
+  });
+});
+
+describe("normalizeCallingId", () => {
+  it("passes through current ids", () => {
+    expect(normalizeCallingId("dominican")).toBe("dominican");
+  });
+
+  it("maps legacy house names to calling ids", () => {
+    expect(normalizeCallingId("St. Juniper Friary")).toBe("franciscan");
+    expect(normalizeCallingId("House of St. Raymond")).toBe("dominican");
+    expect(normalizeCallingId("Monastery of St. Elijah")).toBe("carmelite");
+  });
+
+  it("maps current full and short home strings", () => {
+    expect(normalizeCallingId("Our Lady of Victory House of Studies")).toBe(
+      "dominican",
+    );
+    expect(normalizeCallingId("Our Lady of Sorrows")).toBe("carmelite");
+  });
+
+  it("returns null for junk", () => {
+    expect(normalizeCallingId("")).toBeNull();
+    expect(normalizeCallingId(null)).toBeNull();
   });
 });

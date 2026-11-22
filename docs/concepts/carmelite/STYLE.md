@@ -1,6 +1,6 @@
 # Carmelite path: design style
 
-> **Reference only.** All in-game art is original pixel art drawn in code. The in-game house is the fictional **Monastery of St. Elijah** in the Thornback high country.
+> **Reference only.** All in-game art is original pixel art drawn in code. The in-game house is the fictional **Our Lady of Sorrows Monastery** in the Thornback high country.
 >
 > *Note:* written from CJ's descriptions of the uploaded references; the subagent couldn't open the private uploads, so check the palette against the photos once they're copied in.
 

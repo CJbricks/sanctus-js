@@ -1,6 +1,6 @@
 # Franciscan path: design style
 
-> **Reference only.** All in-game art is original pixel art drawn in code. Photos and artwork in this folder guide mood, color, and costume accuracy. They're never traced, never shipped, and the real friary that inspired the chapel is never named in game. The in-game house is the fictional **St. Juniper Friary**.
+> **Reference only.** All in-game art is original pixel art drawn in code. Photos and artwork in this folder guide mood, color, and costume accuracy. They're never traced, never shipped, and the real friary that inspired the chapel is never named in game. The in-game house is the fictional **Our Lady Mary Untier of Knots Friary**.
 >
 > *Note for the docs PR:* this guide was written from CJ's descriptions of the four reference images. The subagent writing it couldn't open the private uploads, so the palette values are proposals to check against the photos once they're copied into this folder.
 

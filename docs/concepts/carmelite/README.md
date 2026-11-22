@@ -1,6 +1,6 @@
 # Carmelite reference images
 
-**Reference only.** The art is original and drawn in code. The in-game monastery is fictional (the Monastery of St. Elijah); the Carmelite Monks of Wyoming are inspiration only. See [`STYLE.md`](STYLE.md).
+**Reference only.** The art is original and drawn in code. The in-game monastery is fictional (Our Lady of Sorrows Monastery); the Carmelite Monks of Wyoming are inspiration only. See [`STYLE.md`](STYLE.md).
 
 | File | Status | Shows | Used in |
 |---|---|---|---|

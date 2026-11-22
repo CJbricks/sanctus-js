@@ -1,6 +1,6 @@
 # Dominican path: design style
 
-> **Reference only.** All in-game art is original pixel art drawn in code. The in-game house is the fictional **House of Studies of St. Raymond** in Capitol City.
+> **Reference only.** All in-game art is original pixel art drawn in code. The in-game house is the fictional **Our Lady of Victory House of Studies** in Capitol City.
 
 ## Palette (~11 colors)
 
