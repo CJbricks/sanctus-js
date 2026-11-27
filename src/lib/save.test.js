@@ -85,4 +85,30 @@ describe("migrate", () => {
     expect(migrate({ version: 1, callingId: "unknown" })).toBeNull();
     expect(migrate(null)).toBeNull();
   });
+
+  it("maps legacy house-name callingIds to the stable path ids", () => {
+    // WHY: before the Marian rename, docs used St. Juniper / St. Raymond /
+    // St. Elijah. A blob that stored those strings as callingId must Resume.
+    expect(
+      migrate({ version: 1, callingId: "St. Juniper Friary" })?.callingId,
+    ).toBe("franciscan");
+    expect(
+      migrate({ version: 1, callingId: "House of St. Raymond" })?.callingId,
+    ).toBe("dominican");
+    expect(
+      migrate({ version: 1, callingId: "Monastery of St. Elijah" })?.callingId,
+    ).toBe("carmelite");
+  });
+
+  it("maps a legacy home field when callingId is missing or odd", () => {
+    const next = migrate({
+      version: 1,
+      callingId: "legacy-unknown",
+      home: "St. Juniper Friary",
+      spiritualHealth: 70,
+    });
+    expect(next).not.toBeNull();
+    expect(next.callingId).toBe("franciscan");
+    expect(next.spiritualHealth).toBe(70);
+  });
 });

@@ -36,11 +36,11 @@ Each path's **home base** (room by room), its **outside world** (area by area), 
 
 ---
 
-## 1. Franciscan Friars: the Friary of St. Juniper, Five Bridges City
+## 1. Franciscan Friars: Our Lady Mary Untier of Knots Friary, Five Bridges City
 
 > [CONCEPT IMAGE: docs/concepts/franciscan/friary-chapel-interior.png] · [CONCEPT IMAGE: docs/concepts/franciscan/cfr-friars-kitchen.png] · [CONCEPT IMAGE: docs/concepts/franciscan/san-damiano-cross.png]
 
-*St. Juniper Friary* (fictional; named for Brother Juniper, an early companion of St. Francis) is a converted row-house and old rectory in **Ironbridge**, a poor, loud, beloved neighborhood of **Five Bridges City** (NYC-like). The house is **simple and small**: a few rooms drawn in loving detail. The friars spend most of their open Vigor **outside**.
+*Our Lady Mary Untier of Knots Friary* (fictional; named for Our Lady, Undoer/Untier of Knots) is a converted row-house and old rectory in **Ironbridge**, a poor, loud, beloved neighborhood of **Five Bridges City** (NYC-like). The house is **simple and small**: a few rooms drawn in loving detail. The friars spend most of their open Vigor **outside**.
 
 ### Home base, room by room
 
@@ -66,7 +66,7 @@ Each path's **home base** (room by room), its **outside world** (area by area), 
 | **Pocket park** | Benches, tall grass, a little shrine | Night outreach, finds | **Our Lady of Victory** shrine (street niche) |
 | **Later districts** | *Lantern Square* (a Midtown-like crossroads, street preaching), *Harbor Ferry* (an island hospital), *Riverside shelter* (a men's shelter), *Mercy Hospice* (*Sister Bodily Death*), *St. Clare's parish* (confessions once you're a priest) | Unlock by rank | Each has a crucifix; Sorrows at the hospice; Victory at St. Clare's |
 
-### First playable map: St. Juniper Friary and Ironbridge Avenue (40×24)
+### First playable map: Our Lady Mary Untier of Knots Friary and Ironbridge Avenue (40×24)
 
 ```
     0000000000111111111122222222223333333333
@@ -103,13 +103,13 @@ Each path's **home base** (room by room), its **outside world** (area by area), 
 
 ---
 
-## 2. Dominican Friars: the House of Studies of St. Raymond, Capitol City
+## 2. Dominican Friars: Our Lady of Victory House of Studies, Capitol City
 
 > [CONCEPT IMAGE: docs/concepts/dominican/saint-thomas-aquinas/aquinas-crucifix-study.png] · [CONCEPT IMAGE: docs/concepts/dominican/house-of-studies.png] (still wanted)
 
-*The House of Studies of St. Raymond* (fictional; named for St. Raymond of Peñafort, the Dominican canonist who, by tradition, asked Thomas to write the *Summa contra Gentiles*) is a big stone priory on a hill in **Capitol City** (DC-like), next to a Catholic university and across the avenue from a parish. It is **larger** than the friary: a choir chapel, two libraries, classrooms, a cloister garth, a refectory, and many cells.
+*Our Lady of Victory House of Studies* (fictional; named for Our Lady of Victory / of the Rosary) is a big stone priory on a hill in **Capitol City** (DC-like), next to a Catholic university and across the avenue from a parish. It is **larger** than the friary: a choir chapel, two libraries, classrooms, a cloister garth, a refectory, and many cells.
 
-**Bells (weekday, academic year).** St. Raymond's public prayer times follow the published schedule of the Priory of the Immaculate Conception at the Dominican House of Studies (Washington, DC) — see NOTES.md sources and GAME_RULES §3: **7:00 Lauds · 7:20 Mass · 12:00 Rosary and Sext · 5:30 Office of Readings and Vespers · 9:00 Compline (Mon–Thu)**. Sunday Mass is later (11:15 at DHS); summer Compline is earlier. The Salve Regina procession after Compline is kept as Dominican house custom for the fictional priory.
+**Bells (weekday, academic year).** Our Lady of Victory's public prayer times follow the published schedule of the Priory of the Immaculate Conception at the Dominican House of Studies (Washington, DC) — see NOTES.md sources and GAME_RULES §3: **7:00 Lauds · 7:20 Mass · 12:00 Rosary and Sext · 5:30 Office of Readings and Vespers · 9:00 Compline (Mon–Thu)**. Sunday Mass is later (11:15 at DHS); summer Compline is earlier. The Salve Regina procession after Compline is kept as Dominican house custom for the fictional house of studies.
 
 ### Home base, room by room
 
@@ -171,11 +171,11 @@ Each path's **home base** (room by room), its **outside world** (area by area), 
 
 ---
 
-## 3. Carmelite Monks: the Monastery of St. Elijah, the Thornback high country
+## 3. Carmelite Monks: Our Lady of Sorrows Monastery, the Thornback high country
 
 > [CONCEPT IMAGE: docs/concepts/carmelite/monastery/aerial-snow-mountains.png] · [CONCEPT IMAGE: docs/concepts/carmelite/monastery/exterior-night-moon.png] · [CONCEPT IMAGE: docs/concepts/carmelite/monastery/church-stained-glass.png] · [CONCEPT IMAGE: docs/concepts/carmelite/monastery/refectory-reader-pulpit.png] · [CONCEPT IMAGE: docs/concepts/carmelite/monks-horses-barn.png] · [CONCEPT IMAGE: docs/concepts/carmelite/monk-cloister-corridor.png]
 
-*The Monastery of St. Elijah* (fictional; Elijah is Carmel's "Holy Father") is a **castle-like gothic stone monastery** in the **Thornback Mountains**, a Wyoming-like range of pine valleys, high plains, and snow. It sits **inside a cloister wall** (the enclosure). The nearest town is *Willow Crossing*, an hour away. Monks rarely leave. Outside the inner enclosure but inside the monastery lands are the **ranch**: barn, paddock, pasture, gardens, and the creek.
+*Our Lady of Sorrows Monastery* (fictional; named for Our Lady of Sorrows) is a **castle-like gothic stone monastery** in the **Thornback Mountains**, a Wyoming-like range of pine valleys, high plains, and snow. It sits **inside a cloister wall** (the enclosure). The nearest town is *Willow Crossing*, an hour away. Monks rarely leave. Outside the inner enclosure but inside the monastery lands are the **ranch**: barn, paddock, pasture, gardens, and the creek.
 
 ### Home base, room by room (inside the enclosure)
 
@@ -208,7 +208,7 @@ Each path's **home base** (room by room), its **outside world** (area by area), 
 - **Easter to summer:** green meadow, foals in the pasture, garden harvest.
 - **Night:** the **Compline mood** uses the night-and-moon exterior: tan stone, glowing arched windows, the church apse with stained glass, a full moon over snow.
 
-### First playable map: the Monastery of St. Elijah and the guest house (40×24)
+### First playable map: Our Lady of Sorrows Monastery and the guest house (40×24)
 
 ```
     0000000000111111111122222222223333333333
@@ -257,8 +257,8 @@ Each path's **home base** (room by room), its **outside world** (area by area), 
 | Canticle: Sister Mother Earth | Plant or harvest | Friary garden |
 | Canticle: those who pardon | Forgiveness in an Outer encounter | Anywhere in the city |
 | Canticle: Sister Bodily Death | Hospice vigil or the Transitus (Oct 3) | Mercy Hospice / chapel |
-| Summa articles | Study sessions | St. Raymond library; Disputations in classrooms and on the Long Green |
-| Summa "straw" capstone | After Mass, late game | St. Raymond chapel → your cell |
+| Summa articles | Study sessions | Our Lady of Victory library; Disputations in classrooms and on the Long Green |
+| Summa "straw" capstone | After Mass, late game | Our Lady of Victory chapel → your cell |
 | Interior Castle mansions | Spiritual reading | Carmelite library / hermitage |
 | Dark Night stanzas | A dryness week persevered | Hermitage; the Toledo cutscene opens from the library |
 | Little Way acts | Hidden kindnesses | Refectory, kitchen, stable (any path can do them; only Carmelites get the Thérèse readings) |

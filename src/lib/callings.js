@@ -9,6 +9,14 @@
  *
  * Houses, cities, and characters are fictional. Real orders inspire
  * the paths; real organization names and logos never appear in-game.
+ *
+ * House names (CJ 2026-11-22) honor Marian titles:
+ *   Franciscan → Our Lady Mary Untier of Knots Friary
+ *   Dominican  → Our Lady of Victory House of Studies
+ *   Carmelite  → Our Lady of Sorrows Monastery
+ * `home` is the full name (docs + dialogue). `homeShort` fits the
+ * 320×288 Press Start menu row. Calling ids (`franciscan`, …) stay
+ * stable so old saves keep working; see normalizeCallingId().
  */
 
 /** @typedef {"franciscan" | "dominican" | "carmelite"} CallingId */
@@ -21,7 +29,9 @@ export const CALLINGS = [
   {
     id: "franciscan",
     label: "Franciscan Friars",
-    home: "St. Juniper Friary",
+    home: "Our Lady Mary Untier of Knots Friary",
+    // WHY short: full Marian title is too wide for one Press Start line.
+    homeShort: "Untier of Knots Friary",
     world: "Five Bridges City",
     leansToward: "Service to the poor and adoration",
     patrons: "St. Francis, St. Clare",
@@ -29,7 +39,8 @@ export const CALLINGS = [
   {
     id: "dominican",
     label: "Dominican Friars",
-    home: "House of St. Raymond",
+    home: "Our Lady of Victory House of Studies",
+    homeShort: "Our Lady of Victory",
     world: "Capitol City",
     leansToward: "Study, teaching, and preaching",
     patrons: "St. Dominic, St. Thomas Aquinas",
@@ -37,12 +48,35 @@ export const CALLINGS = [
   {
     id: "carmelite",
     label: "Carmelite Monks",
-    home: "Monastery of St. Elijah",
+    home: "Our Lady of Sorrows Monastery",
+    homeShort: "Our Lady of Sorrows",
     world: "Thornback",
     leansToward: "Liturgy, contemplation, and manual labor",
     patrons: "Our Lady of Mount Carmel, St. Teresa, St. John of the Cross",
   },
 ];
+
+/**
+ * Pre-rename house labels and any slug-style keys that might appear in
+ * an early save. Maps to the stable calling id.
+ *
+ * WHY keep these strings here (and only here for runtime):
+ * migrate() can still open a blob that stored the old house name as
+ * callingId or home. Docs may mention the old names once in a changelog.
+ */
+export const LEGACY_CALLING_KEYS = {
+  "St. Juniper Friary": "franciscan",
+  "Friary of St. Juniper": "franciscan",
+  "st-juniper": "franciscan",
+  "st-juniper-friary": "franciscan",
+  "House of St. Raymond": "dominican",
+  "House of Studies of St. Raymond": "dominican",
+  "st-raymond": "dominican",
+  "house-of-st-raymond": "dominican",
+  "Monastery of St. Elijah": "carmelite",
+  "st-elijah": "carmelite",
+  "monastery-of-st-elijah": "carmelite",
+};
 
 /**
  * Look up one calling by id.
@@ -54,12 +88,31 @@ export function getCalling(id) {
 }
 
 /**
+ * Resolve a calling id from a current id, a legacy house name, or a slug.
+ * @param {unknown} value
+ * @returns {CallingId | null}
+ */
+export function normalizeCallingId(value) {
+  if (typeof value !== "string" || !value) return null;
+  if (getCalling(value)) return /** @type {CallingId} */ (value);
+  const fromLegacy = LEGACY_CALLING_KEYS[value];
+  if (fromLegacy && getCalling(fromLegacy)) {
+    return /** @type {CallingId} */ (fromLegacy);
+  }
+  // Match current full or short home strings too (forward-friendly).
+  const byHome = CALLINGS.find(
+    (c) => c.home === value || c.homeShort === value,
+  );
+  return byHome ? /** @type {CallingId} */ (byHome.id) : null;
+}
+
+/**
  * Short placeholder line shown after the player confirms a calling.
  * Real overworld spawn comes later; this keeps the scaffold honest.
  * @param {string} id
  */
 export function callingPlaceholderMessage(id) {
-  const calling = getCalling(id);
+  const calling = getCalling(normalizeCallingId(id) || id);
   if (!calling) return "That path is not yet known.";
   return (
     `You knock at the door of ${calling.home} in ${calling.world}. ` +

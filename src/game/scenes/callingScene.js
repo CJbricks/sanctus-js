@@ -68,7 +68,9 @@ export function createCallingScene({ onChoose, onBack, onMove, onBeep }) {
       size: 8,
       color: COLORS.ink,
     });
-    const detail = makeText(`${calling.home}`, {
+    // WHY homeShort: full Marian house names overflow the 320×288 row;
+    // dialogue / docs still use calling.home (the full title).
+    const detail = makeText(calling.homeShort || calling.home, {
       x: TEXT_X,
       y: y + 22,
       size: 8,

@@ -116,6 +116,13 @@ The vocation menu does **not** load PNGs. Each religious family has a small orig
 
 These are **original drawings**, not real order coats of arms or logos.
 
+### House names in code (beginner note)
+
+- Full name: `calling.home` (dialogue, docs) — e.g. `Our Lady Mary Untier of Knots Friary`.
+- Short UI label: `calling.homeShort` (Choose Your Calling row) — Press Start 2P is wide; long Marian titles would clip on 320×288.
+- Stable id: `calling.id` (`franciscan` / `dominican` / `carmelite`) — **never** rename these casually; saves store the id.
+- If an old save used a retired house string as a key, `normalizeCallingId()` + `migrate()` map it (see `LEGACY_CALLING_KEYS` in `callings.js`).
+
 ### What to build next (for learners)
 
 1. A tiny overworld map (40×24 tiles from WORLD.md) with collision.
@@ -153,7 +160,7 @@ These are **original drawings**, not real order coats of arms or logos.
 | D23 | 2026-11-21 | **Deacon address:** "Brother" in the house, "Deacon" at the altar | CJ answer #5 |
 | D24 | 2026-11-21 | Franciscan and Dominican postulants wear a **simple postulant outfit** (modest, original, not a habit) until investiture; Carmelites keep sourced brown postulant robes + larger scapular | CJ answer #6 |
 | D25 | 2026-11-21 | Carmelite lay-brother vs. priesthood choice at **temporary profession** | CJ answer #7 |
-| D26 | 2026-11-21 | **Dominican horarium** taken from the published academic-year schedule of the Priory of the Immaculate Conception (Dominican House of Studies, Washington, DC); adapted to fictional House of St. Raymond. Cited below | CJ answer #8 + research |
+| D26 | 2026-11-21 | **Dominican horarium** taken from the published academic-year schedule of the Priory of the Immaculate Conception (Dominican House of Studies, Washington, DC); adapted to the fictional Dominican house (later named Our Lady of Victory — see D42). Cited below | CJ answer #8 + research |
 | D27 | 2026-11-21 | **Discerning-out ending: INCLUDE** — gentle, respectful, a good outcome of honest discernment | CJ answer #9 |
 | D28 | 2026-11-21 | Carmelite **hermit-monk epilogue: INCLUDE** | CJ answer #10 |
 | D29 | 2026-11-21 | Women's communities (Poor Clares, Dominican nuns/sisters, Discalced Carmelite nuns) = **future paths**; short roadmap only for now | CJ answer #11 |
@@ -169,6 +176,15 @@ These are **original drawings**, not real order coats of arms or logos.
 | D39 | 2026-11-21 | Fictional names kept: St. Juniper Friary / Five Bridges City; House of St. Raymond / Capitol City; Monastery of St. Elijah / Thornback | CJ answer #22 |
 | D40 | 2026-11-21 | Seasonal Rosary custom **ON by default** (Joyful Sundays in Advent/Christmas; Sorrowful Sundays in Lent) | CJ answer #23 |
 | D41 | 2026-11-22 | Choose Your Calling shows **original Pixi emblems** per path (Wolf of Gubbio, hound+torch, praying hands); no official coats of arms | CJ art briefing |
+| D42 | 2026-11-22 | **House rename (Marian titles):** Franciscan *Our Lady Mary Untier of Knots Friary*; Dominican *Our Lady of Victory House of Studies*; Carmelite *Our Lady of Sorrows Monastery*. Cities unchanged. Calling ids unchanged; `migrate()` maps legacy house-name keys | CJ rename briefing |
+
+**Changelog — house names (2026-11-22).** Earlier docs used *St. Juniper Friary*, *House of St. Raymond*, and *Monastery of St. Elijah*. Those labels are retired everywhere except this note and the legacy map in `src/lib/callings.js` (for save migration). Cities stay Five Bridges City, Capitol City, and Thornback.
+
+### Marian house titles (what the names mean)
+
+- **Our Lady Mary Untier of Knots** (also *Undoer of Knots*): a Marian devotion in which Mary is asked to untie the “knots” of sin, discord, and tangled lives — inspired by a Baroque painting in Augsburg and spread widely by Pope Francis. Naming the Franciscan friary for her fits a house that serves the poor and untangles hard street conversations with prayer.
+- **Our Lady of Victory** (today’s liturgical title **Our Lady of the Rosary**, Oct 7): St. Pius V instituted the feast after the Christian victory at **Lepanto** (1571), crediting the Rosary. The Dominican house of studies bears this title because Dominicans are historically tied to the Rosary and to preaching the faith.
+- **Our Lady of Sorrows** (*Mater Dolorosa*): Mary under the Cross, remembered especially in the **Seven Sorrows** (the prophecy of Simeon, the flight into Egypt, the loss of the Child Jesus, the meeting on the way of the Cross, the Crucifixion, the taking down from the Cross, and the burial). A fitting name for a contemplative Carmelite monastery that dwells long with the Passion in prayer.
 
 ## 3. Facts checked and corrected from the original direction
 
@@ -184,7 +200,7 @@ These are **original drawings**, not real order coats of arms or logos.
 | "Postulants accept each vow" | No vows in postulancy; vows come at the end of the novitiate (temporary/simple), then solemn/perpetual | Entry tasks *embrace* the counsels; vows are professed later |
 | CFR / Dominican postulant dress unknown | Exact CFR and Province of St. Joseph postulant clothing not found in the public sources we checked | **Simple postulant outfit** (modest, original, clearly not a habit) until investiture (CJ). Carmelites keep sourced brown postulant robes + larger scapular |
 | CFR superior "guardian" | CFR call the local superior the **Local Servant** (and the General Servant) | "Local Servant" |
-| Dominican house-of-studies times "approximate" | Priory of the Immaculate Conception (DHS, Washington, DC) publishes its full academic-year and summer horarium | Weekday academic-year bells used for House of St. Raymond (GAME_RULES §3); Sunday/summer variants noted |
+| Dominican house-of-studies times "approximate" | Priory of the Immaculate Conception (DHS, Washington, DC) publishes its full academic-year and summer horarium | Weekday academic-year bells used for Our Lady of Victory House of Studies (GAME_RULES §3); Sunday/summer variants noted |
 | Rosary weekdays | Confirmed by *Rosarium Virginis Mariae* 38: Joyful Mon/Sat, Sorrowful Tue/Fri, Glorious Wed/Sun, Luminous Thu | As sourced |
 | Our Lady Undoer of Knots feast | A devotion, not a liturgical feast. The painting (c. 1700, Johann Georg Melchior Schmidtner) is in St. Peter am Perlach, Augsburg; Pope Francis spread it from Argentina after receiving a postcard of it (he said in 2017 he'd never been to Augsburg) | No calendar date |
 | Our Lady of Victory | Instituted by St. Pius V after Lepanto (Oct 7, 1571) as Our Lady of Victory; renamed Our Lady of the Rosary by Gregory XIII | Oct 7 + October Rosary month |
@@ -271,7 +287,7 @@ Most of the 2026-11-21 list is settled (see decision log D19–D40). Only this r
 
 1. **Reference images** (was #21): the uploads (Franciscan 4, Aquinas 3, Carmelite 6 + 3 saint portraits) still need copying into `docs/concepts/`. CJ will re-send them. More are wanted (see each folder's README). Until then, STYLE.md guides stay provisional against the photos.
 
-*(Former #8 — Dominican horarium — is **resolved**: the Priory of the Immaculate Conception at the Dominican House of Studies publishes its schedule at https://dhspriory.org/prayer/ and in the PFIC Student Handbook. GAME_RULES §3 and WORLD.md now use that weekday academic-year pattern for the House of St. Raymond.)*
+*(Former #8 — Dominican horarium — is **resolved**: the Priory of the Immaculate Conception at the Dominican House of Studies publishes its schedule at https://dhspriory.org/prayer/ and in the PFIC Student Handbook. GAME_RULES §3 and WORLD.md now use that weekday academic-year pattern for Our Lady of Victory House of Studies.)*
 
 ## 7. Roadmap: future women's paths (short)
 
