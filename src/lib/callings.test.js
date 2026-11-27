@@ -43,10 +43,15 @@ describe("CALLINGS menu data", () => {
     expect(getCalling("benedictine")).toBeNull();
   });
 
-  it("builds a placeholder message that uses the full house name", () => {
+  it("builds a Franciscan knock line that uses the full house name", () => {
     const message = callingPlaceholderMessage("franciscan");
     expect(message).toContain("Our Lady Mary Untier of Knots Friary");
     expect(message).toContain("Five Bridges City");
+  });
+
+  it("marks non-Franciscan paths as coming soon", () => {
+    expect(callingPlaceholderMessage("dominican")).toMatch(/coming soon/i);
+    expect(callingPlaceholderMessage("carmelite")).toMatch(/coming soon/i);
   });
 });
 

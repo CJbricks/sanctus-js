@@ -23,6 +23,8 @@ const state = {
   muted: false,
   // Test / SSR host override.
   host: null,
+  // Gentle friary loop handles (oscillators + interval).
+  friary: null,
 };
 
 const listeners = new Set();
@@ -208,6 +210,78 @@ export function playCursorTick() {
 }
 
 /**
+ * Soft original chiptune pad for the friary grounds.
+ * WHY a short looping arpeggio in code (no MP3):
+ * Keeps the project asset-free and mute-friendly. Stops cleanly when
+ * leaving the overworld. Never copies commercial game music.
+ */
+export function startFriaryLoop() {
+  if (!state.unlocked || state.friary) return;
+  const ctx = ensureContext();
+  if (!ctx || !state.master) return;
+
+  const notes = [261.63, 329.63, 392.0, 349.23]; // C E G F — calm open fifths feel
+  let step = 0;
+  const voices = [];
+
+  function pulse(freq, start, dur, gainPeak) {
+    const osc = ctx.createOscillator();
+    osc.type = "square";
+    osc.frequency.setValueAtTime(freq, start);
+    const g = ctx.createGain();
+    const peak = state.muted ? 0.0001 : gainPeak;
+    g.gain.setValueAtTime(0.0001, start);
+    g.gain.exponentialRampToValueAtTime(peak, start + 0.02);
+    g.gain.exponentialRampToValueAtTime(0.0001, start + dur);
+    osc.connect(g);
+    g.connect(state.master);
+    osc.start(start);
+    osc.stop(start + dur + 0.02);
+    voices.push(osc);
+  }
+
+  function tick() {
+    if (!state.friary) return;
+    const ctxNow = ensureContext();
+    if (!ctxNow || !state.master) return;
+    const now = ctxNow.currentTime;
+    const freq = notes[step % notes.length];
+    pulse(freq, now, 0.35, 0.025);
+    // Quiet triangle under the pulse
+    const tri = ctxNow.createOscillator();
+    tri.type = "triangle";
+    tri.frequency.setValueAtTime(freq / 2, now);
+    const tg = ctxNow.createGain();
+    tg.gain.setValueAtTime(state.muted ? 0.0001 : 0.015, now);
+    tg.gain.exponentialRampToValueAtTime(0.0001, now + 0.4);
+    tri.connect(tg);
+    tg.connect(state.master);
+    tri.start(now);
+    tri.stop(now + 0.42);
+    voices.push(tri);
+    step += 1;
+  }
+
+  const intervalId = setInterval(tick, 480);
+  tick();
+  state.friary = { intervalId, voices };
+}
+
+/** Stop the friary loop and release oscillators. */
+export function stopFriaryLoop() {
+  if (!state.friary) return;
+  clearInterval(state.friary.intervalId);
+  for (const v of state.friary.voices) {
+    try {
+      v.stop();
+    } catch {
+      // already stopped
+    }
+  }
+  state.friary = null;
+}
+
+/**
  * Install global unlock listeners once (capture phase so preventDefault
  * on the D-pad cannot swallow the gesture before we resume audio).
  */
@@ -239,6 +313,7 @@ export function installAudio(options = {}) {
 
 /** Test helper: wipe module state between cases. */
 export function resetAudioForTests() {
+  stopFriaryLoop();
   state.installed = false;
   state.unlocked = false;
   state.ctx = null;

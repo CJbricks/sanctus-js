@@ -13,7 +13,7 @@
  *   D-pad = move         (Arrows or WASD)
  */
 
-/** @typedef {"up" | "down" | "left" | "right" | "a" | "b"} GameAction */
+/** @typedef {"up" | "down" | "left" | "right" | "a" | "b" | "start"} GameAction */
 
 /**
  * Map a KeyboardEvent.code (or key) to a game action.
@@ -22,6 +22,9 @@
  * WHY prefer `code` over `key`:
  * `code` is physical position (KeyZ stays Z on an AZERTY layout's
  * letter), which matches how console emulators usually bind keys.
+ *
+ * Start (pause / save menu): Tab or Enter on the overworld uses a
+ * dedicated Menu button too — Enter stays A in menus/dialogue.
  *
  * @param {string} code  KeyboardEvent.code, e.g. "KeyZ"
  * @param {string} [key] KeyboardEvent.key fallback, e.g. "z"
@@ -50,6 +53,9 @@ export function actionFromKey(code, key = "") {
     case "Escape":
     case "Backspace":
       return "b";
+    case "Tab":
+    case "ShiftRight":
+      return "start";
     default:
       break;
   }
@@ -62,9 +68,10 @@ export function actionFromKey(code, key = "") {
   if (lower === "d" || lower === "arrowright") return "right";
   if (lower === "z" || lower === "enter" || lower === " ") return "a";
   if (lower === "x" || lower === "escape" || lower === "backspace") return "b";
+  if (lower === "tab") return "start";
   return null;
 }
 
 /** Human-readable help text for the title / pause screens. */
 export const CONTROL_HELP =
-  "Arrows/WASD move · Z/Enter/Space = A · X/Escape = B";
+  "Arrows/WASD move · Z/Enter/Space = A · X/Escape = B · Tab/Menu = Start";

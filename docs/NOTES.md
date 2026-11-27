@@ -11,8 +11,9 @@ This is the beginner's map of Sanctus, plus the **decision log** and **sources**
 src/app/                 Next.js App Router (layout + the one page)
 src/components/game/     React UI: canvas host, dialogue box, touch D-pad/A/B
 src/game/                Pixi scenes, engine, draw helpers (all art in code)
+src/game/maps/           Editable tile maps (friary grounds first)
 src/game/audio/          original Web Audio chiptune stub (no audio files)
-src/lib/                 RULES: plain JavaScript (save, callings, input map, constants)
+src/lib/                 RULES: plain JavaScript (save, movement, quests, dialogue, …)
 docs/                    these notes, the rules, the world, and concept references
 ```
 
@@ -37,7 +38,7 @@ docs/                    these notes, the rules, the world, and concept referenc
 
 ## 1b. How the scaffold works (beginner guide)
 
-Read this after cloning. It explains the code that actually runs today — not the full game loop in GAME_RULES, just the title → calling → placeholder path.
+Read this after cloning. It explains the code that actually runs today — title → calling → Franciscan friary slice (see also **How the friary overworld works** below).
 
 ### Folder layout (who does what)
 
@@ -49,14 +50,17 @@ Read this after cloning. It explains the code that actually runs today — not t
 | `src/components/game/GameCanvas.js` | Creates/destroys the Pixi engine inside a DOM node. |
 | `src/components/game/DialogueBox.js` | React text window on top of the canvas (GBC-style). |
 | `src/components/game/TouchControls.js` | On-screen D-pad + A/B for phones. |
-| `src/game/engine.js` | Pixi `Application` + scene swap (title ↔ calling). |
-| `src/game/scenes/*.js` | What you see: title logo, calling list — drawn with `Graphics`, no PNGs. |
-| `src/game/draw.js` | Shared pixel helpers (rects, text, character placeholder). |
+| `src/game/engine.js` | Pixi `Application` + scene swap (title ↔ calling ↔ overworld). |
+| `src/game/scenes/*.js` | Title, calling list, friary overworld — `Graphics`, no PNGs. |
+| `src/game/maps/friaryGrounds.js` | Editable string-grid map for the first slice. |
+| `src/game/art/tiles.js` / `characters.js` | Original tile + 32×40 walk sprites. |
+| `src/game/draw.js` | Shared pixel helpers (rects, text). |
 | `src/game/art/orderEmblems.js` | Choose Your Calling emblems: pixel grids + Pixi draw helper. |
-| `src/game/audio/engine.js` | Tiny GB-style Web Audio stub (pulse + noise). Unlocks only after a gesture. |
+| `src/game/audio/engine.js` | Web Audio stub + gentle friary loop. Unlocks after a gesture. |
 | `src/lib/save.js` | `serialize` / `deserialize` / **`migrate`** / `loadSave` / `writeSave`. SSR-safe. |
+| `src/lib/movement.js` / `quests.js` / `dialogue.js` | Pure overworld rules (tested in Node). |
 | `src/lib/callings.js` | The three paths' menu data. |
-| `src/lib/input.js` | Keyboard code → `up`/`down`/`left`/`right`/`a`/`b`. |
+| `src/lib/input.js` | Keyboard code → `up`/`down`/`left`/`right`/`a`/`b`/`start`. |
 
 ### How a frame gets drawn
 
@@ -123,12 +127,75 @@ These are **original drawings**, not real order coats of arms or logos.
 - Stable id: `calling.id` (`franciscan` / `dominican` / `carmelite`) — **never** rename these casually; saves store the id.
 - If an old save used a retired house string as a key, `normalizeCallingId()` + `migrate()` map it (see `LEGACY_CALLING_KEYS` in `callings.js`).
 
+### How the friary overworld works (first playable slice)
+
+This is the beginner walkthrough of the Franciscan grounds. Dominican and Carmelite still show **coming soon** after Choose Your Calling.
+
+#### The pieces that talk to each other
+
+```
+friaryGrounds.js (string grid)
+        │ parse → tiles, spawn, NPCs, props
+        ▼
+movement.js (canWalk / tryStep / facingTile)
+        │ used by
+        ▼
+overworldScene.js (Pixi draw + camera + A to interact)
+        │ calls applyQuestAction
+        ▼
+quests.js (task flags → Postulant)
+        │ lines go to
+        ▼
+dialogue.js → DialogueBox (typewriter)
+        │
+save.js (map, position, facing, rank, tasks)
+```
+
+#### Tile map (how to edit it)
+
+1. Open `src/game/maps/friaryGrounds.js`.
+2. Edit `RAW_ROWS` — each character is one 32×32 tile. **Every row must be the same length.**
+3. Legend is in the file header (`#` wall, `.` floor, `+` door, `o` Our Lady statue, `x` crucifix, `S` Local Servant, `F` garden friar, `N` neighbor, …).
+4. `parseFriaryMap()` turns letters into `{ id, solid }`, NPC positions, and spawn. Solid tiles block walking.
+5. Colors live in `src/game/art/tiles.js` — change a look without changing collision.
+
+#### Movement + camera
+
+- `src/lib/movement.js` is pure: `tryStep` moves one tile if `canWalk` says yes (and NPCs count as blockers).
+- The overworld scene holds arrow/WASD keys, steps every ~160ms, and animates a 4-frame walk on the 32×40 sprite (`src/game/art/characters.js`).
+- Camera keeps the player near the center of the 320×288 view, clamped to the map edges.
+
+#### Dialogue
+
+- Facing an NPC (or Our Lady / the crucifix) and pressing **A** runs `applyQuestAction`.
+- `dialogue.js` owns the typewriter: A snaps/advances, B skips the line or closes.
+- `DialogueBox.js` is React on top of the canvas (Press Start 2P via CSS).
+
+#### Quest flags → Postulant
+
+- Flags: `introduced`, `poverty`, `chastity`, `obedience`, `received` (see `quests.js`).
+- Talk to the **Local Servant** for the three tasks; give your bag to the **neighbor**; pray before **Our Lady**; help **Brother Garden**.
+- When all three are done, talk to the Servant again → `rank` / `role` become `"postulant"`, sprite switches to the postulant look. **No vows yet.**
+
+#### Save / Resume
+
+- Still `sanctus-save-v1`. New fields: `facing`, `tasks`, `hasBag`, `position.mapId` (`friary-grounds`).
+- `migrate()` fills defaults so an old stub save (no tasks) still loads.
+- Title **Continue** resumes a Franciscan save into the grounds. **Menu** (Tab or the Menu button) → Save / Resume.
+
+#### How to add an NPC
+
+1. Put a letter in `RAW_ROWS` and teach `LEGEND` + the parse loop (like `S` / `F` / `N`).
+2. Give them a `look` in `lookForNpc()` if they need a unique outfit.
+3. In `overworldScene.js` `interact()`, map their id to a `applyQuestAction` id (or a new case in `quests.js`).
+4. Add a Vitest case that the flag or line you care about actually changes.
+
 ### What to build next (for learners)
 
-1. A tiny overworld map (40×24 tiles from WORLD.md) with collision.
-2. A 4-frame walk cycle on the 32×40 character stub in `draw.js`.
-3. Real dialogue from finding the superior (entry tasks).
-4. Songs in `src/game/audio/` using the pulse / wave / noise channels.
+1. Expand the friary interiors and Five Bridges street beyond the gate.
+2. Horarium bells and the daily Vigor loop (GAME_RULES).
+3. Dominican / Carmelite first maps (replace "coming soon").
+4. Longer songs in `src/game/audio/` using the pulse / wave / noise channels.
 
 ## 2. Decision log
 
@@ -177,6 +244,7 @@ These are **original drawings**, not real order coats of arms or logos.
 | D40 | 2026-11-21 | Seasonal Rosary custom **ON by default** (Joyful Sundays in Advent/Christmas; Sorrowful Sundays in Lent) | CJ answer #23 |
 | D41 | 2026-11-22 | Choose Your Calling shows **original Pixi emblems** per path (Wolf of Gubbio, hound+torch, praying hands); no official coats of arms | CJ art briefing |
 | D42 | 2026-11-22 | **House rename (Marian titles):** Franciscan *Our Lady Mary Untier of Knots Friary*; Dominican *Our Lady of Victory House of Studies*; Carmelite *Our Lady of Sorrows Monastery*. Cities unchanged. Calling ids unchanged; `migrate()` maps legacy house-name keys | CJ rename briefing |
+| D43 | 2026-11-27 | **First Franciscan playable slice:** friary grounds + street edge map, walk + dialogue, three entry tasks → Postulant, save fields for map/facing/tasks; Dominican/Carmelite stay "coming soon" | CJ slice briefing |
 
 **Changelog — house names (2026-11-22).** Earlier docs used *St. Juniper Friary*, *House of St. Raymond*, and *Monastery of St. Elijah*. Those labels are retired everywhere except this note and the legacy map in `src/lib/callings.js` (for save migration). Cities stay Five Bridges City, Capitol City, and Thornback.
 
