@@ -2,7 +2,7 @@
 
 *A Game Boy Color–style Catholic JRPG about growing in holiness.*
 
-> Repo: [`CJbricks/sanctus-js`](https://github.com/CJbricks/sanctus-js). Status: **first Franciscan playable slice**. Title → Choose Your Calling → friary grounds (walk, talk, three entry tasks → Postulant). Dominican / Carmelite show "coming soon".
+> Repo: [`CJbricks/sanctus-js`](https://github.com/CJbricks/sanctus-js). Status: **Franciscan playable slice + graphics upgrade**. Title → Choose Your Calling → friary grounds (detailed code-drawn tiles/sprites, walk, talk, entry tasks → Postulant). Dominican / Carmelite show "coming soon".
 
 You are a young man who has just knocked on the door of a religious house. You don't win by beating anyone. You win by becoming a saint, slowly: one Office, one Mass, one soup line, one hard conversation at a time. The look and feel follow early Pokémon-era handhelds (a top-down tile overworld, dialogue boxes, menus, a rival, tall grass). All art, music, and names are **original and drawn in code**. *Brick City* (`CJbricks/brick-city`) is a **pattern reference only**: we reuse its ideas (calendar, energy blocks, meters, unlock gates), not its code or assets.
 

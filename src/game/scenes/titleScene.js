@@ -4,13 +4,16 @@
  *
  * Flow: show SANCTUS → A starts a new calling pick, or Continue resumes
  * a Franciscan save into the friary overworld.
- * No image files. Atmosphere comes from a simple sky + cross motif
- * drawn as rectangles (a silhouette, never a sacrament token).
+ * Atmosphere: night sky, soft stars, chapel silhouette with a steeple
+ * cross (geometry only — never a sacrament token). Menu uses the shared
+ * ornate panel frame so it matches the upgraded dialogue / overworld.
  */
 
 import { Container, Graphics } from "pixi.js";
 import { VIEW_HEIGHT, VIEW_WIDTH } from "@/lib/constants";
-import { COLORS, fillRect, makeText, strokeRect } from "@/game/draw";
+import { COLORS, drawPanelFrame, fillRect, makeText } from "@/game/draw";
+import { PALETTE } from "@/game/art/palette";
+import { ditherSpeckle } from "@/game/art/pixelHelpers";
 
 /**
  * @param {object} hooks
@@ -23,22 +26,30 @@ export function createTitleScene({ hasSave = false, onStart, onContinue, onBeep 
   const root = new Container();
   const bg = new Graphics();
 
-  // Night sky wash
+  // Night sky wash with a soft gradient band
   fillRect(bg, 0, 0, VIEW_WIDTH, VIEW_HEIGHT, COLORS.sky);
-  // Ground strip
-  fillRect(bg, 0, VIEW_HEIGHT - 48, VIEW_WIDTH, 48, COLORS.grass);
-  // Simple chapel silhouette (geometry only — reverent, not playful)
-  fillRect(bg, VIEW_WIDTH / 2 - 40, VIEW_HEIGHT - 120, 80, 72, 0x243044);
-  fillRect(bg, VIEW_WIDTH / 2 - 10, VIEW_HEIGHT - 148, 20, 28, 0x243044);
+  fillRect(bg, 0, 0, VIEW_WIDTH, 40, PALETTE.skyDeep, 0.45);
+  ditherSpeckle(bg, 8, 8, VIEW_WIDTH - 16, 100, COLORS.parchmentLit, 2);
+  // Ground strip with shade
+  fillRect(bg, 0, VIEW_HEIGHT - 52, VIEW_WIDTH, 52, COLORS.grass);
+  fillRect(bg, 0, VIEW_HEIGHT - 52, VIEW_WIDTH, 4, PALETTE.grass.shade);
+  // Chapel silhouette (geometry only — reverent, not playful)
+  fillRect(bg, VIEW_WIDTH / 2 - 44, VIEW_HEIGHT - 128, 88, 76, 0x243044);
+  fillRect(bg, VIEW_WIDTH / 2 - 44, VIEW_HEIGHT - 128, 88, 3, 0x3a4a64);
+  fillRect(bg, VIEW_WIDTH / 2 - 12, VIEW_HEIGHT - 156, 24, 28, 0x243044);
+  // Lit window
+  fillRect(bg, VIEW_WIDTH / 2 - 8, VIEW_HEIGHT - 100, 10, 12, PALETTE.candle.mid);
+  fillRect(bg, VIEW_WIDTH / 2 - 8, VIEW_HEIGHT - 100, 10, 1, PALETTE.candle.highlight);
   // Cross on the steeple (two rectangles)
-  fillRect(bg, VIEW_WIDTH / 2 - 2, VIEW_HEIGHT - 168, 4, 22, COLORS.gold);
-  fillRect(bg, VIEW_WIDTH / 2 - 8, VIEW_HEIGHT - 162, 16, 4, COLORS.gold);
+  fillRect(bg, VIEW_WIDTH / 2 - 2, VIEW_HEIGHT - 176, 4, 22, COLORS.gold);
+  fillRect(bg, VIEW_WIDTH / 2 - 8, VIEW_HEIGHT - 170, 16, 4, COLORS.gold);
+  fillRect(bg, VIEW_WIDTH / 2 - 2, VIEW_HEIGHT - 176, 4, 1, COLORS.goldLit);
 
   root.addChild(bg);
 
   const title = makeText("SANCTUS", {
     x: VIEW_WIDTH / 2,
-    y: 48,
+    y: 44,
     size: 16,
     color: COLORS.gold,
     align: "center",
@@ -47,7 +58,7 @@ export function createTitleScene({ hasSave = false, onStart, onContinue, onBeep 
 
   const subtitle = makeText("A pilgrimage in pixel form", {
     x: VIEW_WIDTH / 2,
-    y: 76,
+    y: 72,
     size: 8,
     color: COLORS.parchment,
     align: "center",
@@ -78,14 +89,13 @@ export function createTitleScene({ hasSave = false, onStart, onContinue, onBeep 
 
   function paintMenu() {
     panel.clear();
-    const h = options.length * 22 + 16;
-    fillRect(panel, 24, VIEW_HEIGHT - 108, VIEW_WIDTH - 48, h, COLORS.parchment, 0.95);
-    strokeRect(panel, 24, VIEW_HEIGHT - 108, VIEW_WIDTH - 48, h, COLORS.ink, 2);
+    const h = options.length * 22 + 20;
+    drawPanelFrame(panel, 20, VIEW_HEIGHT - 112, VIEW_WIDTH - 40, h);
     labels.forEach((label, i) => {
       label.style.fill = i === index ? COLORS.ink : COLORS.muted;
-      // Tiny cursor block beside the selected row
       if (i === index) {
-        fillRect(panel, 36, VIEW_HEIGHT - 96 + i * 22, 6, 6, COLORS.ink);
+        fillRect(panel, 32, VIEW_HEIGHT - 96 + i * 22, 6, 6, COLORS.ink);
+        fillRect(panel, 33, VIEW_HEIGHT - 95 + i * 22, 4, 1, COLORS.gold);
       }
     });
   }
@@ -96,7 +106,6 @@ export function createTitleScene({ hasSave = false, onStart, onContinue, onBeep 
 
   return {
     root,
-    /** @param {import("@/lib/input").GameAction | null} action */
     handleAction(action) {
       if (action === "up" || action === "down") {
         if (options.length < 2) return;
@@ -113,7 +122,6 @@ export function createTitleScene({ hasSave = false, onStart, onContinue, onBeep 
         else onStart();
       }
     },
-    /** Soft blink so the prompt feels alive without noisy motion. */
     tick(deltaMs) {
       blink += deltaMs;
       const alpha = blink % 1000 < 700 ? 1 : 0.35;

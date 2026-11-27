@@ -48,9 +48,9 @@ export const EMBLEM_MEANINGS = {
     "Clasped hands in prayer — fitting a contemplative, cloistered path.",
 };
 
-/** Shared GBC-friendly palette for all three emblems. */
+/** Shared GBC-friendly palette for all three emblems (aligned to OUTLINE). */
 export const EMBLEM_PALETTE = {
-  outline: 0x2a1f14,
+  outline: 0x1c140f,
   fur: 0x6b5a45,
   furLight: 0x9a8468,
   furDark: 0x3d3228,

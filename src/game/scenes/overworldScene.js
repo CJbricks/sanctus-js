@@ -2,24 +2,26 @@
  * overworldScene.js
  * First playable slice: friary grounds + street edge.
  *
- * Responsibilities:
- * - draw the tile map and characters (nearest-neighbor Graphics)
- * - grid movement with collision + camera follow
- * - A to talk / pray when facing an NPC or devotion prop
- * - report quest + position changes upward so React can save / dialogue
- *
- * WHY the scene stays "dumb" about dialogue text:
- * Quest lines come from applyQuestAction (pure). The scene only says
- * "player pressed A facing the Local Servant" and gets lines back.
+ * Graphics upgrade notes:
+ * - The tile map is baked once (optionally into a Pixi Texture) so we do
+ *   not redraw every grass tuft every frame.
+ * - Character poses are cached by look/facing/frame.
+ * - Candle flicker redraws only the chapel props on a slow timer.
  */
 
-import { Container, Graphics } from "pixi.js";
-import { drawMapTiles } from "@/game/art/tiles";
+import { Container, Graphics, Sprite } from "pixi.js";
+import { drawMapTiles, drawTile } from "@/game/art/tiles";
 import {
   drawCharacter,
   lookForNpc,
   lookForRank,
 } from "@/game/art/characters";
+import {
+  bakeTexture,
+  characterCacheKey,
+  clearTextureCache,
+  getOrCreate,
+} from "@/game/art/textureCache";
 import { COLORS, fillRect, makeText } from "@/game/draw";
 import { FRIARY_MAP, MAP_ID } from "@/game/maps/friaryGrounds";
 import {
@@ -35,34 +37,51 @@ import {
 } from "@/lib/movement";
 import { applyQuestAction, currentObjective } from "@/lib/quests";
 
-/** Ms between grid steps while a direction is held. */
 const STEP_MS = 160;
-/** Ms between walk animation frames while moving. */
 const FRAME_MS = 120;
+const FLICKER_MS = 220;
 
 /**
  * @param {object} hooks
- * @param {object} hooks.save  current save blob (mutated via onStateChange)
+ * @param {object} hooks.save
  * @param {(next: object) => void} hooks.onStateChange
  * @param {(payload: { speaker: string, lines: string[] }) => void} hooks.onDialogue
  * @param {() => void} [hooks.onOpenMenu]
  * @param {() => void} [hooks.onBeep]
  * @param {() => void} [hooks.onStep]
+ * @param {object} [hooks.renderer]  Pixi renderer for texture baking
  */
 export function createOverworldScene(hooks) {
   const map = FRIARY_MAP;
+  const renderer = hooks.renderer || null;
   const root = new Container();
   const world = new Container();
   root.addChild(world);
 
-  const tileLayer = new Graphics();
-  drawMapTiles(tileLayer, map);
-  world.addChild(tileLayer);
+  // --- Static ground (baked once) ---
+  const tileGfx = new Graphics();
+  // Bake the ground without candle props; flicker layer draws those.
+  drawMapTiles(tileGfx, map, { flicker: 0, skipAnimated: true });
+  const mapTex = bakeTexture(renderer, tileGfx, `map:${MAP_ID}:static`);
+  if (mapTex) {
+    const mapSprite = new Sprite(mapTex);
+    mapSprite.roundPixels = true;
+    world.addChild(mapSprite);
+    tileGfx.destroy();
+  } else {
+    world.addChild(tileGfx);
+  }
 
-  const actorLayer = new Graphics();
+  // Chapel candles / halo flicker (only those tiles — cheap).
+  const flickerLayer = new Graphics();
+  world.addChild(flickerLayer);
+
+  // Actors: prefer cached textures; fall back to live Graphics.
+  const actorLayer = new Container();
   world.addChild(actorLayer);
+  const actorFallback = new Graphics();
+  actorLayer.addChild(actorFallback);
 
-  // Soft HUD strip (objective). Drawn in screen space, not world space.
   const hud = new Graphics();
   root.addChild(hud);
   const objectiveText = makeText("", {
@@ -80,37 +99,97 @@ export function createOverworldScene(hooks) {
   let frameTimer = 0;
   let walkFrame = 0;
   let moving = false;
+  let flicker = 0;
+  let flickerTimer = 0;
+  /** @type {Map<string, Sprite>} */
+  const actorSprites = new Map();
 
   function blockers() {
     return map.npcs.map((n) => ({ x: n.x, y: n.y }));
   }
 
+  function characterTexture(look, facing, frame) {
+    const key = characterCacheKey(look, facing, frame);
+    return getOrCreate(key, () => {
+      if (!renderer || typeof renderer.generateTexture !== "function") {
+        return null;
+      }
+      const g = new Graphics();
+      drawCharacter(g, 0, 0, { look, facing, frame });
+      const tex = renderer.generateTexture(g);
+      g.destroy();
+      return tex;
+    });
+  }
+
+  function placeActor(id, look, facing, frame, px, py) {
+    const tex = characterTexture(look, facing, frame);
+    if (!tex) {
+      drawCharacter(actorFallback, px, py, { look, facing, frame });
+      return;
+    }
+    let sprite = actorSprites.get(id);
+    if (!sprite) {
+      sprite = new Sprite(tex);
+      sprite.roundPixels = true;
+      actorSprites.set(id, sprite);
+      actorLayer.addChild(sprite);
+    } else if (sprite.texture !== tex) {
+      sprite.texture = tex;
+    }
+    sprite.x = px;
+    sprite.y = py;
+    sprite.visible = true;
+  }
+
+  function paintFlicker() {
+    flickerLayer.clear();
+    for (const prop of map.props) {
+      if (prop.id !== "crucifix" && prop.id !== "ourLady") continue;
+      drawTile(
+        flickerLayer,
+        prop.id,
+        prop.x * TILE_SIZE,
+        prop.y * TILE_SIZE,
+        { tx: prop.x, ty: prop.y, flicker },
+      );
+    }
+  }
+
   function paint() {
-    actorLayer.clear();
-    // NPCs first, then player on top.
+    actorFallback.clear();
+    for (const sprite of actorSprites.values()) sprite.visible = false;
+
     for (const npc of map.npcs) {
       const px = npc.x * TILE_SIZE;
       const py = npc.y * TILE_SIZE - (CHAR_HEIGHT - TILE_SIZE);
-      drawCharacter(actorLayer, px, py, {
-        facing: npc.facing,
-        frame: 0,
-        look: lookForNpc(npc.id),
-      });
+      placeActor(
+        npc.id,
+        lookForNpc(npc.id),
+        npc.facing,
+        0,
+        px,
+        py,
+      );
     }
     const px = state.x * TILE_SIZE;
     const py = state.y * TILE_SIZE - (CHAR_HEIGHT - TILE_SIZE);
-    drawCharacter(actorLayer, px, py, {
-      facing: state.facing,
-      frame: moving ? walkFrame : 0,
-      look: lookForRank(state.rank),
-    });
+    placeActor(
+      "player",
+      lookForRank(state.rank),
+      state.facing,
+      moving ? walkFrame : 0,
+      px,
+      py,
+    );
     centerCamera();
     paintHud();
   }
 
   function paintHud() {
     hud.clear();
-    fillRect(hud, 0, 0, VIEW_WIDTH, 22, 0x1a2a4a, 0.72);
+    fillRect(hud, 0, 0, VIEW_WIDTH, 22, COLORS.sky, 0.78);
+    fillRect(hud, 0, 21, VIEW_WIDTH, 1, COLORS.gold, 0.5);
     objectiveText.text = currentObjective(state);
   }
 
@@ -179,7 +258,6 @@ export function createOverworldScene(hooks) {
       actionId = "obedience-help";
       speaker = "Brother Garden";
     } else if (npc?.id === "neighbor") {
-      // Poverty task: give the bag when you still carry it and tasks began.
       if (state.tasks?.introduced && state.hasBag !== false && !state.tasks?.poverty) {
         actionId = "poverty-give";
       } else {
@@ -218,11 +296,11 @@ export function createOverworldScene(hooks) {
     hooks.onDialogue?.({ speaker, lines: result.lines });
   }
 
+  paintFlicker();
   paint();
 
   return {
     root,
-    /** Keep held directions for smooth stepping. */
     setHeld(action, isDown) {
       if (!action) return;
       if (isDown) held.add(action);
@@ -231,7 +309,6 @@ export function createOverworldScene(hooks) {
     clearHeld() {
       held.clear();
     },
-    /** @param {import("@/lib/input").GameAction | "start" | null} action */
     handleAction(action) {
       if (!action) return;
       if (action === "start") {
@@ -240,7 +317,6 @@ export function createOverworldScene(hooks) {
       }
       const facing = facingFromAction(action);
       if (facing) {
-        // Instant face + step on press; hold continues in tick().
         tryMove(facing);
         stepCooldown = STEP_MS;
         return;
@@ -249,13 +325,18 @@ export function createOverworldScene(hooks) {
         interact();
       }
     },
-    /** Apply an external save (e.g. Resume from pause menu). */
     applySave(save) {
       state = syncFromSave(save);
       paint();
     },
     tick(deltaMs) {
       stepCooldown = Math.max(0, stepCooldown - deltaMs);
+      flickerTimer += deltaMs;
+      if (flickerTimer >= FLICKER_MS) {
+        flickerTimer = 0;
+        flicker = (flicker + 1) % 3;
+        paintFlicker();
+      }
       const dir =
         firstHeld(["up", "down", "left", "right"], held) || null;
       if (dir) {
@@ -271,13 +352,15 @@ export function createOverworldScene(hooks) {
           moving = true;
           paint();
         }
-      } else {
+      } else if (moving) {
         moving = false;
         walkFrame = 0;
         frameTimer = 0;
+        paint();
       }
     },
     destroy() {
+      clearTextureCache();
       root.destroy({ children: true });
     },
   };
