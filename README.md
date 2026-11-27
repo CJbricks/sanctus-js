@@ -2,7 +2,7 @@
 
 *A Game Boy Color–style Catholic JRPG about growing in holiness.*
 
-> Repo: [`CJbricks/sanctus-js`](https://github.com/CJbricks/sanctus-js). Status: **scaffold + design docs**. Title → Choose Your Calling is playable in the browser; overworld systems come next.
+> Repo: [`CJbricks/sanctus-js`](https://github.com/CJbricks/sanctus-js). Status: **first Franciscan playable slice**. Title → Choose Your Calling → friary grounds (walk, talk, three entry tasks → Postulant). Dominican / Carmelite show "coming soon".
 
 You are a young man who has just knocked on the door of a religious house. You don't win by beating anyone. You win by becoming a saint, slowly: one Office, one Mass, one soup line, one hard conversation at a time. The look and feel follow early Pokémon-era handhelds (a top-down tile overworld, dialogue boxes, menus, a rival, tall grass). All art, music, and names are **original and drawn in code**. *Brick City* (`CJbricks/brick-city`) is a **pattern reference only**: we reuse its ideas (calendar, energy blocks, meters, unlock gates), not its code or assets.
 
@@ -71,9 +71,9 @@ npm run build    # production Next.js build (what Vercel runs)
 npm start        # serve the production build locally
 ```
 
-**Controls:** Arrows / WASD move · Z / Enter / Space = A · X / Escape = B · on-screen D-pad and A/B for touch · M mute.
+**Controls:** Arrows / WASD move · Z / Enter / Space = A · X / Escape = B · Tab / Menu = Start · on-screen D-pad and A/B for touch · M mute.
 
-**What works today:** title screen → press A → Choose Your Calling (Franciscan / Dominican / Carmelite) → placeholder dialogue + a `sanctus-save-v1` stub write. Overworld maps and the daily loop come next.
+**What works today:** title (Continue / New) → Choose Your Calling → **Franciscan** friary grounds overworld (Local Servant + three entry tasks → Postulant, save/resume). Dominican / Carmelite paths show a coming-soon note. Daily horarium loop still to come.
 
 **Env vars:** none required. If a future feature needs a secret, document it here and set it in the Vercel project settings — never commit secrets to the repo.
 

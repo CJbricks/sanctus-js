@@ -7,7 +7,8 @@
  * preventDefault first can swallow that turn and leave the game silent.
  *
  * Holding a direction uses pointer capture so a slight thumb slide does
- * not cancel the hold until pointerup.
+ * not cancel the hold until pointerup. onHold keeps the overworld
+ * stepping while the thumb stays down.
  */
 
 "use client";
@@ -21,23 +22,32 @@ const PAD = [
   { dir: "right", label: "▶", style: { gridColumn: 3, gridRow: 2 } },
 ];
 
-function bindHold(dir, onAction) {
-  return {
-    onPointerDown: (event) => {
-      unlockAudio();
-      event.preventDefault();
-      event.currentTarget.setPointerCapture(event.pointerId);
-      onAction(dir);
-    },
-    onContextMenu: (event) => event.preventDefault(),
-  };
-}
-
 /**
  * @param {object} props
  * @param {(action: string) => void} props.onAction
+ * @param {(action: string, isDown: boolean) => void} [props.onHold]
  */
-export function TouchControls({ onAction }) {
+export function TouchControls({ onAction, onHold }) {
+  function bindHold(dir) {
+    return {
+      onPointerDown: (event) => {
+        unlockAudio();
+        event.preventDefault();
+        event.currentTarget.setPointerCapture(event.pointerId);
+        onHold?.(dir, true);
+        onAction(dir);
+      },
+      onPointerUp: (event) => {
+        event.preventDefault();
+        onHold?.(dir, false);
+      },
+      onPointerCancel: () => {
+        onHold?.(dir, false);
+      },
+      onContextMenu: (event) => event.preventDefault(),
+    };
+  }
+
   return (
     <div className="touch-bar" data-testid="touch-bar">
       <div className="d-pad" data-testid="d-pad">
@@ -48,7 +58,7 @@ export function TouchControls({ onAction }) {
             className="pad-btn"
             style={pad.style}
             aria-label={pad.dir}
-            {...bindHold(pad.dir, onAction)}
+            {...bindHold(pad.dir)}
           >
             {pad.label}
           </button>

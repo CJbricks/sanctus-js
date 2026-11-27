@@ -1,22 +1,28 @@
 /**
  * engine.js
- * Tiny Pixi scene host for the SANCTUS scaffold.
+ * Tiny Pixi scene host for SANCTUS.
  *
- * Owns one Application, swaps title ↔ calling scenes, and forwards
+ * Owns one Application, swaps title ↔ calling ↔ overworld, and forwards
  * game actions from the React input layer. Drawing stays in scenes;
  * this file is just the stage manager + ticker.
  *
  * WHY a thin engine:
- * Later we will add an overworld map, NPCs, and menus. Keeping scene
- * swap logic in one place means those systems plug in without rewriting
- * the React canvas host.
+ * Overworld, menus, and future maps plug in here without rewriting the
+ * React canvas host.
  */
 
 import { Application, Container } from "pixi.js";
 import { VIEW_HEIGHT, VIEW_WIDTH } from "@/lib/constants";
-import { playConfirmBeep, playCursorTick } from "@/game/audio/engine";
+import {
+  playConfirmBeep,
+  playCursorTick,
+  startFriaryLoop,
+  stopFriaryLoop,
+} from "@/game/audio/engine";
 import { createTitleScene } from "@/game/scenes/titleScene";
 import { createCallingScene } from "@/game/scenes/callingScene";
+import { createOverworldScene } from "@/game/scenes/overworldScene";
+import { loadSave } from "@/lib/save";
 
 /**
  * Boot Pixi into a DOM element and return a controller handle.
@@ -24,6 +30,9 @@ import { createCallingScene } from "@/game/scenes/callingScene";
  * @param {HTMLElement} host
  * @param {object} handlers
  * @param {(callingId: string) => void} handlers.onCallingChosen
+ * @param {(payload: { speaker: string, lines: string[] }) => void} [handlers.onDialogue]
+ * @param {(state: object) => void} [handlers.onStateChange]
+ * @param {() => void} [handlers.onOpenMenu]
  * @param {() => void} [handlers.onTitle]
  */
 export async function createGameEngine(host, handlers) {
@@ -50,29 +59,48 @@ export async function createGameEngine(host, handlers) {
   const stageRoot = new Container();
   app.stage.addChild(stageRoot);
 
-  /** @type {{ root: Container, handleAction: Function, tick: Function, destroy: Function } | null} */
+  /** @type {{ root: Container, handleAction: Function, tick: Function, destroy: Function, setHeld?: Function, clearHeld?: Function, applySave?: Function } | null} */
   let scene = null;
+  /** @type {"title"|"calling"|"overworld"} */
+  let mode = "title";
 
-  function showScene(next) {
+  function showScene(next, nextMode) {
     if (scene) {
       stageRoot.removeChild(scene.root);
       scene.destroy();
     }
     scene = next;
+    mode = nextMode;
     stageRoot.addChild(scene.root);
   }
 
   function showTitle() {
+    stopFriaryLoop();
     handlers.onTitle?.();
+    const existing = loadSave();
     showScene(
       createTitleScene({
+        hasSave: Boolean(existing),
         onStart: () => showCalling(),
+        onContinue: () => {
+          const save = loadSave();
+          if (save?.callingId === "franciscan") {
+            showOverworld(save);
+          } else if (save) {
+            // Non-Franciscan saves: back to calling with a note via React.
+            handlers.onCallingChosen(save.callingId);
+          } else {
+            showCalling();
+          }
+        },
         onBeep: () => playConfirmBeep(),
       }),
+      "title",
     );
   }
 
   function showCalling() {
+    stopFriaryLoop();
     showScene(
       createCallingScene({
         onChoose: (id) => handlers.onCallingChosen(id),
@@ -80,6 +108,21 @@ export async function createGameEngine(host, handlers) {
         onMove: () => playCursorTick(),
         onBeep: () => playConfirmBeep(),
       }),
+      "calling",
+    );
+  }
+
+  function showOverworld(save) {
+    startFriaryLoop();
+    showScene(
+      createOverworldScene({
+        save,
+        onStateChange: (next) => handlers.onStateChange?.(next),
+        onDialogue: (payload) => handlers.onDialogue?.(payload),
+        onOpenMenu: () => handlers.onOpenMenu?.(),
+        onBeep: () => playConfirmBeep(),
+      }),
+      "overworld",
     );
   }
 
@@ -95,9 +138,21 @@ export async function createGameEngine(host, handlers) {
       if (!action) return;
       scene?.handleAction?.(action);
     },
+    setHeld(action, isDown) {
+      scene?.setHeld?.(action, isDown);
+    },
+    clearHeld() {
+      scene?.clearHeld?.();
+    },
     goTitle: showTitle,
     goCalling: showCalling,
+    goOverworld: showOverworld,
+    getMode: () => mode,
+    applySave(save) {
+      scene?.applySave?.(save);
+    },
     destroy() {
+      stopFriaryLoop();
       if (scene) scene.destroy();
       scene = null;
       app.destroy(true);

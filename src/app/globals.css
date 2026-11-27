@@ -100,6 +100,20 @@ body {
   opacity: 0.7;
 }
 
+.start-menu {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(220px, calc(100% - 24px));
+  padding: 14px;
+  background: var(--sanctus-parchment);
+  color: var(--sanctus-ink);
+  border: 3px solid var(--sanctus-ink);
+  font-size: 8px;
+  z-index: 3;
+}
+
 .control-help {
   font-size: 7px;
   line-height: 1.6;

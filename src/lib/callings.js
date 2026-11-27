@@ -107,15 +107,28 @@ export function normalizeCallingId(value) {
 }
 
 /**
- * Short placeholder line shown after the player confirms a calling.
- * Real overworld spawn comes later; this keeps the scaffold honest.
+ * Message after confirming a calling.
+ * Franciscan opens the friary overworld (slice). Other paths are
+ * "coming soon" so Choose Your Calling still lists all three.
  * @param {string} id
  */
 export function callingPlaceholderMessage(id) {
   const calling = getCalling(normalizeCallingId(id) || id);
   if (!calling) return "That path is not yet known.";
+  if (calling.id === "franciscan") {
+    return (
+      `You knock at the door of ${calling.home} in ${calling.world}. ` +
+      `Find the Local Servant on the grounds.`
+    );
+  }
   return (
-    `You knock at the door of ${calling.home} in ${calling.world}. ` +
-    `The grounds await — find the superior. (Placeholder.)`
+    `${calling.label}: coming soon. ` +
+    `The house of ${calling.home} in ${calling.world} is not open yet. ` +
+    `Choose the Franciscan path to play the first slice.`
   );
+}
+
+/** True when this calling has a playable overworld today. */
+export function isCallingPlayable(id) {
+  return normalizeCallingId(id) === "franciscan";
 }

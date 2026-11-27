@@ -13,10 +13,15 @@
  * - loadSave / writeSave / clearSave are thin localStorage wrappers.
  *   They guard for SSR: Next.js may import this module on the server,
  *   where `window` and `localStorage` do not exist.
+ *
+ * Slice fields (map, facing, rank, task flags) live on the same blob so
+ * Resume puts you back on the friary grounds mid-quest.
  */
 
 import { SAVE_KEY, SAVE_VERSION } from "@/lib/constants";
 import { getCalling, normalizeCallingId } from "@/lib/callings";
+import { createEntryTasks, normalizeEntryTasks } from "@/lib/quests";
+import { FRIARY_MAP, MAP_ID } from "@/game/maps/friaryGrounds";
 
 /**
  * Build a brand-new save after the player picks a calling.
@@ -28,6 +33,7 @@ export function createNewSave({ callingId }) {
   if (!calling) {
     throw new Error(`Unknown calling: ${callingId}`);
   }
+  const spawn = FRIARY_MAP.spawn;
   return {
     version: SAVE_VERSION,
     callingId: calling.id,
@@ -44,8 +50,14 @@ export function createNewSave({ callingId }) {
     spiritualHealth: 100,
     // Vigor blocks remaining today (10 max — see GAME_RULES).
     vigor: 10,
-    // Pixel position on the first map (filled when overworld lands).
-    position: { x: 0, y: 0, mapId: "grounds" },
+    // Tile position on the friary grounds (Franciscan slice).
+    position: { x: spawn.x, y: spawn.y, mapId: MAP_ID },
+    // Which way the sprite faces (up/down/left/right).
+    facing: "down",
+    // Entry-task flags (poverty / chastity / obedience).
+    tasks: createEntryTasks(),
+    // Bag you arrive with — given away for the poverty task.
+    hasBag: true,
     // Mute preference rides along so Resume restores it.
     muted: false,
     createdAt: null,
@@ -105,8 +117,24 @@ export function migrate(data) {
     const pos = /** @type {Record<string, unknown>} */ (raw.position);
     if (typeof pos.x === "number" && Number.isFinite(pos.x)) next.position.x = Math.round(pos.x);
     if (typeof pos.y === "number" && Number.isFinite(pos.y)) next.position.y = Math.round(pos.y);
-    if (typeof pos.mapId === "string" && pos.mapId) next.position.mapId = pos.mapId;
+    if (typeof pos.mapId === "string" && pos.mapId) {
+      // Old stub used "grounds" — treat it as the friary map.
+      next.position.mapId = pos.mapId === "grounds" ? MAP_ID : pos.mapId;
+    }
   }
+
+  if (
+    raw.facing === "up" ||
+    raw.facing === "down" ||
+    raw.facing === "left" ||
+    raw.facing === "right"
+  ) {
+    next.facing = raw.facing;
+  }
+
+  next.tasks = normalizeEntryTasks(raw.tasks);
+
+  if (typeof raw.hasBag === "boolean") next.hasBag = raw.hasBag;
 
   if (typeof raw.muted === "boolean") next.muted = raw.muted;
   if (typeof raw.createdAt === "string" || raw.createdAt === null) next.createdAt = raw.createdAt;

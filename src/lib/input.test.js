@@ -37,6 +37,10 @@ describe("actionFromKey", () => {
     expect(actionFromKey("", "ArrowUp")).toBe("up");
   });
 
+  it("maps Start (Tab) for the pause / save menu", () => {
+    expect(actionFromKey("Tab")).toBe("start");
+  });
+
   it("returns null for unrelated keys", () => {
     expect(actionFromKey("KeyQ")).toBeNull();
     expect(actionFromKey("F1")).toBeNull();
