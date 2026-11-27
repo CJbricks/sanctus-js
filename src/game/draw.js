@@ -6,31 +6,33 @@
  * Soft GPU filtering would blur our hard 32×32 tiles. Everything here
  * uses whole-pixel rectangles so `image-rendering: pixelated` on the
  * canvas CSS keeps the Game Boy Color look when the page scales up.
+ *
+ * Menu COLORS come from the shared palette so title / calling / overworld
+ * share one look after the graphics upgrade.
  */
 
-import { Graphics, Text } from "pixi.js";
+import { Text } from "pixi.js";
+import { UI_COLORS } from "@/game/art/palette";
+import { fillRect, shadedRect } from "@/game/art/pixelHelpers";
+
+export { fillRect };
 
 /** Soft parchment background shared by title and calling screens. */
 export const COLORS = {
-  sky: 0x1a2a4a,
-  parchment: 0xf2e6c8,
-  ink: 0x2a1f14,
-  gold: 0xc9a227,
-  brick: 0x8b4513,
-  grass: 0x3d6b3d,
+  sky: UI_COLORS.sky,
+  parchment: UI_COLORS.parchment,
+  parchmentLit: UI_COLORS.parchmentLit,
+  parchmentShade: UI_COLORS.parchmentShade,
+  ink: UI_COLORS.ink,
+  gold: UI_COLORS.gold,
+  goldLit: UI_COLORS.goldLit,
+  brick: 0x8b5340,
+  grass: UI_COLORS.grass,
   select: 0x5b2c6f,
-  white: 0xffffff,
-  muted: 0x6b5a45,
+  white: UI_COLORS.white,
+  muted: UI_COLORS.muted,
+  outline: UI_COLORS.outline,
 };
-
-/**
- * Fill a solid rectangle. Coordinates are in logical game pixels.
- * @param {Graphics} g
- */
-export function fillRect(g, x, y, w, h, color, alpha = 1) {
-  g.rect(x, y, w, h);
-  g.fill({ color, alpha });
-}
 
 /**
  * Draw a 1px outline box (GBC-style menu frame).
@@ -39,6 +41,34 @@ export function fillRect(g, x, y, w, h, color, alpha = 1) {
 export function strokeRect(g, x, y, w, h, color, width = 2) {
   g.rect(x, y, w, h);
   g.stroke({ width, color, alignment: 0 });
+}
+
+/**
+ * Ornate GBC dialogue / menu frame: outer ink, gold mid, parchment fill,
+ * corner ticks, and a soft inner shade line.
+ * WHY: a plain border looks unfinished next to the richer tiles/sprites.
+ * @param {Graphics} g
+ */
+export function drawPanelFrame(g, x, y, w, h) {
+  fillRect(g, x, y, w, h, COLORS.outline);
+  fillRect(g, x + 1, y + 1, w - 2, h - 2, COLORS.gold);
+  fillRect(g, x + 3, y + 3, w - 6, h - 6, COLORS.parchment);
+  // Inner shadow (bottom + right)
+  fillRect(g, x + 3, y + h - 5, w - 6, 2, COLORS.parchmentShade, 0.55);
+  fillRect(g, x + w - 5, y + 3, 2, h - 6, COLORS.parchmentShade, 0.35);
+  // Lit top edge
+  fillRect(g, x + 3, y + 3, w - 6, 1, COLORS.parchmentLit);
+  // Corner ornaments
+  const corners = [
+    [x + 4, y + 4],
+    [x + w - 8, y + 4],
+    [x + 4, y + h - 8],
+    [x + w - 8, y + h - 8],
+  ];
+  corners.forEach(([cx, cy]) => {
+    fillRect(g, cx, cy, 4, 1, COLORS.gold);
+    fillRect(g, cx, cy, 1, 4, COLORS.gold);
+  });
 }
 
 /**
@@ -77,16 +107,16 @@ export function makeText(content, options = {}) {
 }
 
 /**
- * Simple standing character placeholder (32×40), code-drawn.
- * Four-frame walk cycles come later; this proves the footprint.
+ * Legacy standing character stub — prefer characters.js for gameplay.
  * @param {number} bodyColor
  */
 export function drawCharacterPlaceholder(g, x, y, bodyColor = 0x4a6fa5) {
-  // Head
-  fillRect(g, x + 8, y, 16, 12, 0xe8c39e);
-  // Body / tunic
+  shadedRect(g, x + 8, y, 16, 12, {
+    highlight: 0xf0d4b0,
+    mid: 0xe8c39e,
+    shade: 0xc4a080,
+  });
   fillRect(g, x + 4, y + 12, 24, 18, bodyColor);
-  // Legs
   fillRect(g, x + 6, y + 30, 8, 10, 0x2c2c2c);
   fillRect(g, x + 18, y + 30, 8, 10, 0x2c2c2c);
 }

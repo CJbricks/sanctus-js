@@ -53,6 +53,8 @@ Read this after cloning. It explains the code that actually runs today — title
 | `src/game/engine.js` | Pixi `Application` + scene swap (title ↔ calling ↔ overworld). |
 | `src/game/scenes/*.js` | Title, calling list, friary overworld — `Graphics`, no PNGs. |
 | `src/game/maps/friaryGrounds.js` | Editable string-grid map for the first slice. |
+| `src/game/art/palette.js` / `pixelHelpers.js` | Shared shade ramps + outline/dither/shadow helpers. |
+| `src/game/art/textureCache.js` | Bake map/character textures once; reuse each frame. |
 | `src/game/art/tiles.js` / `characters.js` | Original tile + 32×40 walk sprites. |
 | `src/game/draw.js` | Shared pixel helpers (rects, text). |
 | `src/game/art/orderEmblems.js` | Choose Your Calling emblems: pixel grids + Pixi draw helper. |
@@ -99,6 +101,48 @@ npm run build     # production build (same as Vercel)
 ```
 
 Tests live next to the code (`src/lib/*.test.js`) and run in **Node**, not a browser — because save/input/callings are pure functions.
+
+### How pixel art is drawn in code (graphics upgrade)
+
+SANCTUS does **not** load PNGs for the overworld. Tiles and characters are functions that fill 1×1 (or small) rectangles with Pixi `Graphics`. CSS `image-rendering: pixelated` keeps edges sharp when the 320×288 canvas scales up.
+
+#### Shared palette (`src/game/art/palette.js`)
+
+- Materials (grass, stone, wood, habit gray, skin, gold, Marian blue…) each have a **shade ramp**: `highlight`, `mid`, `shade`, `deep`, plus a shared `OUTLINE`.
+- `mixHex` / `shadeRamp` build those steps so every drawer uses the same edge weight.
+- WHY ramps: a single flat color looks like a prototype. Lit edges + shaded edges read as form on a tiny sprite.
+
+#### Helpers (`src/game/art/pixelHelpers.js`)
+
+| Helper | Job |
+|---|---|
+| `outlineRect` | Dark rim, then fill — separates sprites from busy grass |
+| `shadedRect` | Mid fill + lit top/left + shaded bottom/right |
+| `ditherChecker` / `ditherSpeckle` | Fake extra shades the GBC way |
+| `dropShadow` | Soft ellipse under props/characters so they sit on the ground |
+| `tileVariant(x,y,n)` | Deterministic 0..n-1 from tile coords (ground does not “sparkle”) |
+
+Brick City is a **technique** reference (ramps, hash variants, outlines). Sanctus colors and drawings are original.
+
+#### Texture cache (`src/game/art/textureCache.js`)
+
+- `getOrCreate(key, factory)` bakes a value once.
+- The overworld bakes the **static map** (and character poses) through the Pixi renderer when available, so we do not redraw every tuft every frame.
+- Candle flicker redraws **only** the crucifix / Our Lady tiles on a slow timer.
+- WHY cache: hundreds of `fillRect` calls per character × every frame would hitch on phones.
+
+#### How to tweak or add a tile
+
+1. Add or edit a drawer in `src/game/art/tiles.js` (use `PALETTE` + helpers).
+2. If the map needs a new letter, teach `LEGEND` in `friaryGrounds.js`.
+3. Prefer `tileVariant(tx, ty, 3)` for 2–3 looks of common ground.
+4. Keep sacred art as scenery (crucifix, Our Lady) — never inventory items.
+
+#### How to tweak or add a sprite
+
+1. Edit `kitFor` / `drawFront` (etc.) in `src/game/art/characters.js`.
+2. Keep the footprint **32×40**, four walk frames, four facings.
+3. Cache keys are `char:look:facing:frame` — change look names carefully.
 
 ### How order emblems are drawn (Choose Your Calling)
 
@@ -245,6 +289,7 @@ save.js (map, position, facing, rank, tasks)
 | D41 | 2026-11-22 | Choose Your Calling shows **original Pixi emblems** per path (Wolf of Gubbio, hound+torch, praying hands); no official coats of arms | CJ art briefing |
 | D42 | 2026-11-22 | **House rename (Marian titles):** Franciscan *Our Lady Mary Untier of Knots Friary*; Dominican *Our Lady of Victory House of Studies*; Carmelite *Our Lady of Sorrows Monastery*. Cities unchanged. Calling ids unchanged; `migrate()` maps legacy house-name keys | CJ rename briefing |
 | D43 | 2026-11-27 | **First Franciscan playable slice:** friary grounds + street edge map, walk + dialogue, three entry tasks → Postulant, save fields for map/facing/tasks; Dominican/Carmelite stay "coming soon" | CJ slice briefing |
+| D44 | 2026-11-27 | **Graphics quality upgrade:** shared shade-ramp palette + pixel helpers, richer tiles/characters/UI frames, texture cache; Brick City techniques only (no copied art) | CJ art briefing |
 
 **Changelog — house names (2026-11-22).** Earlier docs used *St. Juniper Friary*, *House of St. Raymond*, and *Monastery of St. Elijah*. Those labels are retired everywhere except this note and the legacy map in `src/lib/callings.js` (for save migration). Cities stay Five Bridges City, Capitol City, and Thornback.
 

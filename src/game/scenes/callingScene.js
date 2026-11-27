@@ -11,7 +11,7 @@
 import { Container, Graphics } from "pixi.js";
 import { CALLINGS } from "@/lib/callings";
 import { VIEW_HEIGHT, VIEW_WIDTH } from "@/lib/constants";
-import { COLORS, fillRect, makeText, strokeRect } from "@/game/draw";
+import { COLORS, drawPanelFrame, fillRect, makeText, strokeRect } from "@/game/draw";
 import {
   EMBLEM_SIZE,
   EMBLEM_TITLES,
@@ -36,8 +36,8 @@ export function createCallingScene({ onChoose, onBack, onMove, onBeep }) {
   const root = new Container();
   const bg = new Graphics();
   fillRect(bg, 0, 0, VIEW_WIDTH, VIEW_HEIGHT, COLORS.sky);
-  fillRect(bg, 8, 8, VIEW_WIDTH - 16, VIEW_HEIGHT - 16, COLORS.parchment);
-  strokeRect(bg, 8, 8, VIEW_WIDTH - 16, VIEW_HEIGHT - 16, COLORS.ink, 3);
+  // Shared ornate frame so Choose Your Calling matches the dialogue box.
+  drawPanelFrame(bg, 6, 6, VIEW_WIDTH - 12, VIEW_HEIGHT - 12);
   root.addChild(bg);
 
   const heading = makeText("Choose Your Calling", {
@@ -100,10 +100,11 @@ export function createCallingScene({ onChoose, onBack, onMove, onBeep }) {
       row.rowBg.clear();
       const selected = i === index;
       if (selected) {
-        fillRect(row.rowBg, PANEL_X, row.y, VIEW_WIDTH - PANEL_X * 2, ROW_H - 4, 0xe8d9a8);
+        fillRect(row.rowBg, PANEL_X, row.y, VIEW_WIDTH - PANEL_X * 2, ROW_H - 4, COLORS.parchmentShade);
+        fillRect(row.rowBg, PANEL_X + 2, row.y + 2, VIEW_WIDTH - PANEL_X * 2 - 4, ROW_H - 8, 0xe8d9a8);
         strokeRect(row.rowBg, PANEL_X, row.y, VIEW_WIDTH - PANEL_X * 2, ROW_H - 4, COLORS.gold, 2);
-        // Cursor triangle (code-drawn)
         fillRect(row.rowBg, PANEL_X + 2, row.y + 22, 6, 6, COLORS.ink);
+        fillRect(row.rowBg, PANEL_X + 3, row.y + 23, 4, 1, COLORS.gold);
       }
 
       // WHY only the selected emblem animates: keeps motion intentional,

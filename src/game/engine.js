@@ -117,6 +117,7 @@ export async function createGameEngine(host, handlers) {
     showScene(
       createOverworldScene({
         save,
+        renderer: app.renderer,
         onStateChange: (next) => handlers.onStateChange?.(next),
         onDialogue: (payload) => handlers.onDialogue?.(payload),
         onOpenMenu: () => handlers.onOpenMenu?.(),
